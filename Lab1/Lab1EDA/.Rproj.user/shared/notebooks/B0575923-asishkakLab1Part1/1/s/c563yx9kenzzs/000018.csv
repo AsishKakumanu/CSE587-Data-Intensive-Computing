@@ -1,0 +1,1 @@
+"0","ggplot(mtcars, mapping = aes(x = disp, y = mpg, color = as.factor(cyl))) + geom_point()"

@@ -1,0 +1,90 @@
+library(shiny)
+
+shinyUI(fluidPage(
+  
+  br(),
+  br(),
+  
+  sidebarPanel
+  (
+    # Select Input in Sidebar 
+    selectInput("map",
+                label ="Select data",
+                choices =c("Small Data" = 1,
+                           "Big Data" = 2,
+                           "CDC vs Twitter CDC Map" = 3),
+                selected="Choose one map"),
+    
+    # Second Input in sidebar
+    
+    conditionalPanel(
+      condition = "input.map==1",
+      selectInput("map2",
+                  label ="Select the Data source",
+                  choices =c("Twitter" = 1,
+                             "NyTimes" = 2,
+                             "Common Crawl" = 3),
+                  selected="Choose one data source")
+    ),
+    
+    conditionalPanel(
+      condition = "input.map==2",
+      selectInput("map2",
+                  label ="Select the Map",
+                  choices =c("Twitter" = 1,
+                             "NyTimes" = 2,
+                             "Common Crawl" = 3),
+                  selected="Choose one data source")
+    ),
+    
+    
+    conditionalPanel(
+      condition = "input.map==3",
+      selectInput("map2",
+                  label ="Select the Map",
+                  choices =c("All keywords" = 1,
+                             "Flu" = 2,
+                             "Influenza" = 3),
+                  selected="Choose one map")
+    )
+    
+    
+    ),
+  
+  
+  mainPanel
+  (
+    # Analysis Text
+    conditionalPanel(
+      condition = "input.map==3",
+      textOutput("differences")
+    ),
+    
+    # Image 1 
+    uiOutput("image"),
+    
+    # Show 2nd Image when condition is TRUE
+    conditionalPanel
+    (
+      condition = "input.map==3",
+      conditionalPanel
+      (
+        condition = "input.map2==1",
+        uiOutput("image2")
+      ),
+      conditionalPanel
+      (
+        condition = "input.map2==2",
+        uiOutput("Flu")
+      ),
+      conditionalPanel
+      (
+        condition = "input.map2==3",
+        uiOutput("Influenza")
+      )
+      #uiOutput("image2")
+    )
+  )
+)
+)
+

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552083189542.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3957823362",
+    "id" : "64E08D97",
+    "lastKnownWriteTime" : 1555892314,
+    "last_content_update" : 1555892314130,
+    "path" : "~/Downloads/Academia- Local/University/SEM2/DIC/Lab1/Work/Part3/ShinyApp/ui.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "20,33",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,1297 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{kakumanuLab1Part1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Name : Asish Kakumanu UB Person No. : 50288695 UBIT Name : asishkak
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Teammate
+
+Name : Swapnika P UB Person No. : 50289464 UBIT Name : swapnika 
+
+    \subsection{Basic R Commands}\label{basic-r-commands}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Creating Variables foo and bar with values 2 and 4 respectively.}
+        
+        foo \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{2}
+        bar \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{4} 
+        foo \PY{o}{+} bar
+\end{Verbatim}
+
+
+    6
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Assigning the resultant value of foo + bar to variable (result).}
+        
+        result \PY{o}{\PYZlt{}\PYZhy{}} foo \PY{o}{+} bar
+        result
+\end{Verbatim}
+
+
+    6
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Vectors (Lists)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Combine all numbers into a vector and assign them to a variable called list.}
+         
+         \PY{k+kt}{list} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Returns item in list with index 2.}
+         \PY{k+kt}{list}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+    4
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Returns item in list with index 1.}
+         \PY{k+kt}{list}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    2
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kt}{list}\PY{p}{[}\PY{l+m}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kt}{list}\PY{p}{[}\PY{l+m}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+    <NA>
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Adding a value to the list at index 5.}
+         
+         \PY{k+kt}{list}\PY{p}{[}\PY{l+m}{5}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{10}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Return list. }
+         
+         \PY{k+kt}{list}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 2
+\item 4
+\item 6
+\item 8
+\item 10
+\end{enumerate*}
+
+
+    
+    \subsection{Arithmetic Operations}\label{arithmetic-operations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{l+m}{10} \PY{o}{/} \PY{l+m}{2}
+\end{Verbatim}
+
+
+    5
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{l+m}{2} \PY{o}{==} \PY{l+m}{0}
+\end{Verbatim}
+
+
+    FALSE
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{l+m}{10} \PY{o}{\PYZca{}} \PY{l+m}{2}
+\end{Verbatim}
+
+
+    100
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{l+m}{4} \PY{o}{*} \PY{l+m}{5}
+\end{Verbatim}
+
+
+    20
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{l+m}{1} \PY{o}{+} \PY{l+m}{6}
+\end{Verbatim}
+
+
+    7
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{p}{(}\PY{l+m}{2}\PY{l+m}{+2}\PY{p}{)} \PY{o}{==} \PY{l+m}{4}
+\end{Verbatim}
+
+
+    TRUE
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb+bp}{T} \PY{o}{==} \PY{k+kc}{TRUE}
+\end{Verbatim}
+
+
+    TRUE
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb+bp}{F} \PY{o}{\PYZam{}\PYZam{}} \PY{n+nb+bp}{T}
+\end{Verbatim}
+
+
+    FALSE
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n+nb+bp}{F} \PY{o}{||} \PY{k+kc}{TRUE}
+\end{Verbatim}
+
+
+    TRUE
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} vect \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} vect \PY{o}{*} \PY{l+m}{2}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 4
+\item 8
+\item 12
+\item 16
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kp}{names}\PY{p}{(}vect\PY{p}{)} \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{1st\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{2nd\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{3rd\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{4th\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} vect
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[1st] 2
+\item[2nd] 4
+\item[3rd] 6
+\item[4th] 8
+\end{description*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} vect\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{2nd\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{20}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} vect
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[1st] 2
+\item[2nd] 20
+\item[3rd] 6
+\item[4th] 8
+\end{description*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} demo\PY{p}{(}graphics\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+	demo(graphics)
+	---- \textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}\textasciitilde{}
+
+> \#  Copyright (C) 1997-2009 The R Core Team
+> 
+> require(datasets)
+
+> require(grDevices); require(graphics)
+
+> \#\# Here is some code which illustrates some of the differences between
+> \#\# R and S graphics capabilities.  Note that colors are generally specified
+> \#\# by a character string name (taken from the X11 rgb.txt file) and that line
+> \#\# textures are given similarly.  The parameter "bg" sets the background
+> \#\# parameter for the plot and there is also an "fg" parameter which sets
+> \#\# the foreground color.
+> 
+> 
+> x <- stats::rnorm(50)
+
+> opar <- par(bg = "white")
+
+> plot(x, ann = FALSE, type = "n")
+
+> abline(h = 0, col = gray(.90))
+
+> lines(x, col = "green4", lty = "dotted")
+
+> points(x, bg = "limegreen", pch = 21)
+
+> title(main = "Simple Use of Color In a Plot",
++       xlab = "Just a Whisper of a Label",
++       col.main = "blue", col.lab = gray(.8),
++       cex.main = 1.2, cex.lab = 1.0, font.main = 4, font.lab = 3)
+
+> \#\# A little color wheel.	 This code just plots equally spaced hues in
+> \#\# a pie chart.	If you have a cheap SVGA monitor (like me) you will
+> \#\# probably find that numerically equispaced does not mean visually
+> \#\# equispaced.  On my display at home, these colors tend to cluster at
+> \#\# the RGB primaries.  On the other hand on the SGI Indy at work the
+> \#\# effect is near perfect.
+> 
+> par(bg = "gray")
+
+> pie(rep(1,24), col = rainbow(24), radius = 0.9)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> title(main = "A Sample Color Wheel", cex.main = 1.4, font.main = 3)
+
+> title(xlab = "(Use this as a test of monitor linearity)",
++       cex.lab = 0.8, font.lab = 3)
+
+> \#\# We have already confessed to having these.  This is just showing off X11
+> \#\# color names (and the example (from the postscript manual) is pretty "cute".
+> 
+> pie.sales <- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
+
+> names(pie.sales) <- c("Blueberry", "Cherry",
++ 		      "Apple", "Boston Cream", "Other", "Vanilla Cream")
+
+> pie(pie.sales,
++     col = c("purple","violetred1","green3","cornsilk","cyan","white"))
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> title(main = "January Pie Sales", cex.main = 1.8, font.main = 1)
+
+> title(xlab = "(Don't try this at home kids)", cex.lab = 0.8, font.lab = 3)
+
+> \#\# Boxplots:  I couldn't resist the capability for filling the "box".
+> \#\# The use of color seems like a useful addition, it focuses attention
+> \#\# on the central bulk of the data.
+> 
+> par(bg="cornsilk")
+
+> n <- 10
+
+> g <- gl(n, 100, n*100)
+
+> x <- rnorm(n*100) + sqrt(as.numeric(g))
+
+> boxplot(split(x,g), col="lavender", notch=TRUE)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> title(main="Notched Boxplots", xlab="Group", font.main=4, font.lab=1)
+
+> \#\# An example showing how to fill between curves.
+> 
+> par(bg="white")
+
+> n <- 100
+
+> x <- c(0,cumsum(rnorm(n)))
+
+> y <- c(0,cumsum(rnorm(n)))
+
+> xx <- c(0:n, n:0)
+
+> yy <- c(x, rev(y))
+
+> plot(xx, yy, type="n", xlab="Time", ylab="Distance")
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> polygon(xx, yy, col="gray")
+
+> title("Distance Between Brownian Motions")
+
+> \#\# Colored plot margins, axis labels and titles.	 You do need to be
+> \#\# careful with these kinds of effects.	It's easy to go completely
+> \#\# over the top and you can end up with your lunch all over the keyboard.
+> \#\# On the other hand, my market research clients love it.
+> 
+> x <- c(0.00, 0.40, 0.86, 0.85, 0.69, 0.48, 0.54, 1.09, 1.11, 1.73, 2.05, 2.02)
+
+> par(bg="lightgray")
+
+> plot(x, type="n", axes=FALSE, ann=FALSE)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> usr <- par("usr")
+
+> rect(usr[1], usr[3], usr[2], usr[4], col="cornsilk", border="black")
+
+> lines(x, col="blue")
+
+> points(x, pch=21, bg="lightcyan", cex=1.25)
+
+> axis(2, col.axis="blue", las=1)
+
+> axis(1, at=1:12, lab=month.abb, col.axis="blue")
+
+> box()
+
+> title(main= "The Level of Interest in R", font.main=4, col.main="red")
+
+> title(xlab= "1996", col.lab="red")
+
+> \#\# A filled histogram, showing how to change the font used for the
+> \#\# main title without changing the other annotation.
+> 
+> par(bg="cornsilk")
+
+> x <- rnorm(1000)
+
+> hist(x, xlim=range(-4, 4, x), col="lavender", main="")
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> title(main="1000 Normal Random Variates", font.main=3)
+
+> \#\# A scatterplot matrix
+> \#\# The good old Iris data (yet again)
+> 
+> pairs(iris[1:4], main="Edgar Anderson's Iris Data", font.main=4, pch=19)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> pairs(iris[1:4], main="Edgar Anderson's Iris Data", pch=21,
++       bg = c("red", "green3", "blue")[unclass(iris\$Species)])
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> \#\# Contour plotting
+> \#\# This produces a topographic map of one of Auckland's many volcanic "peaks".
+> 
+> x <- 10*1:nrow(volcano)
+
+> y <- 10*1:ncol(volcano)
+
+> lev <- pretty(range(volcano), 10)
+
+> par(bg = "lightcyan")
+
+> pin <- par("pin")
+
+> xdelta <- diff(range(x))
+
+> ydelta <- diff(range(y))
+
+> xscale <- pin[1]/xdelta
+
+> yscale <- pin[2]/ydelta
+
+> scale <- min(xscale, yscale)
+
+> xadd <- 0.5*(pin[1]/scale - xdelta)
+
+> yadd <- 0.5*(pin[2]/scale - ydelta)
+
+> plot(numeric(0), numeric(0),
++      xlim = range(x)+c(-1,1)*xadd, ylim = range(y)+c(-1,1)*yadd,
++      type = "n", ann = FALSE)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> usr <- par("usr")
+
+> rect(usr[1], usr[3], usr[2], usr[4], col="green3")
+
+> contour(x, y, volcano, levels = lev, col="yellow", lty="solid", add=TRUE)
+
+> box()
+
+> title("A Topographic Map of Maunga Whau", font= 4)
+
+> title(xlab = "Meters North", ylab = "Meters West", font= 3)
+
+> mtext("10 Meter Contour Spacing", side=3, line=0.35, outer=FALSE,
++       at = mean(par("usr")[1:2]), cex=0.7, font=3)
+
+> \#\# Conditioning plots
+> 
+> par(bg="cornsilk")
+
+> coplot(lat \textasciitilde{} long | depth, data = quakes, pch = 21, bg = "green3")
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+> par(opar)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_21.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} A function name generateSquares which prints the square of the given number.}
+         
+         generateSquares \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)}\PY{p}{\PYZob{}}
+             \PY{k+kr}{return}\PY{p}{(}x\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} generateSquares\PY{p}{(}\PY{l+m}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    16
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} A function with three arguments a,b,c. }
+         
+         func\PYZus{}arguments \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function} \PY{p}{(}a\PY{o}{=}\PY{l+m}{1}\PY{p}{,}b\PY{o}{=}\PY{l+m}{2}\PY{p}{,}\PY{k+kt}{c}\PY{o}{=}\PY{l+m}{3}\PY{p}{)}\PY{p}{\PYZob{}}
+             res \PY{o}{\PYZlt{}\PYZhy{}} a \PY{o}{+} \PY{p}{(}b \PY{o}{*} \PY{k+kt}{c}\PY{p}{)}
+             \PY{k+kp}{print}\PY{p}{(}res\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} Pass values to arguments with index.}
+         
+         func\PYZus{}arguments\PY{p}{(}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 34
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Passing values to arguments using name of arguments }
+         
+         func\PYZus{}arguments\PY{p}{(}a\PY{o}{=}\PY{l+m}{4}\PY{p}{,}b\PY{o}{=}\PY{l+m}{5}\PY{p}{,}\PY{k+kt}{c}\PY{o}{=}\PY{l+m}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 14
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} mydataframe \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}
+             
+         \PY{c+c1}{\PYZsh{} Creates a vector (list) starting from 1 to 5.}
+         stu\PYZus{}id \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{5}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{} Creates a vector (list) using the below names.}
+         stu\PYZus{}name \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Bob\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Pat\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Jane\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Peter\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Han\PYZdq{}}\PY{p}{)}\PY{p}{,}
+         \PY{c+c1}{\PYZsh{} To avoid problems when reassigning values within a dataframe. We use stringsAsFactors.}
+         stringsAsFactors \PY{o}{=} \PY{k+kc}{FALSE}
+         \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} res  \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}mydataframe\PY{o}{\PYZdl{}}stu\PYZus{}id\PY{p}{,}mydataframe\PY{o}{\PYZdl{}}stu\PYZus{}name\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} res
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ mydataframe.stu\_id & mydataframe.stu\_name\\
+\hline
+	 1     & Bob  \\
+	 2     & Pat  \\
+	 3     & Jane \\
+	 4     & Peter\\
+	 5     & Han  \\
+\end{tabular}
+
+
+    
+    \subsection{Problem 1}\label{problem-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} pch \PYZhy{} Generates a Symbol}
+        \PY{c+c1}{\PYZsh{} lty \PYZhy{} line type (Solid, Dashled line)}
+        \PY{c+c1}{\PYZsh{} col \PYZhy{} Color}
+        \PY{c+c1}{\PYZsh{} Inset \PYZhy{} Place to display on the grid}
+        \PY{c+c1}{\PYZsh{} rpois \PYZhy{} Generates multinomial or multi\PYZhy{}Poission random variates based on an Aitchison composition}
+        \PY{c+c1}{\PYZsh{} nx, ny \PYZhy{} Horizontal and Vertical lines.}
+        
+        \PY{c+c1}{\PYZsh{} A vector of values assigned to variable \PYZsq{}sales1\PYZsq{}.}
+        sales1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{12}\PY{p}{,}\PY{l+m}{14}\PY{p}{,}\PY{l+m}{16}\PY{p}{,}\PY{l+m}{29}\PY{p}{,}\PY{l+m}{30}\PY{p}{,}\PY{l+m}{45}\PY{p}{,}\PY{l+m}{19}\PY{p}{,}\PY{l+m}{20}\PY{p}{,}\PY{l+m}{16}\PY{p}{,}\PY{l+m}{19}\PY{p}{,}\PY{l+m}{34}\PY{p}{,}\PY{l+m}{20}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} A vector of random values between 12 to 34 are assigned to \PYZsq{}sales2\PYZsq{}.}
+        sales2 \PY{o}{\PYZlt{}\PYZhy{}} rpois\PY{p}{(}\PY{l+m}{12}\PY{p}{,}\PY{l+m}{34}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Background Color}
+        par\PY{p}{(}bg\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{cornsilk\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot sales1 with color blue, with each point using \PYZsq{}o\PYZsq{}.}
+        \PY{c+c1}{\PYZsh{} y\PYZhy{}axis extends from 0 to 100. }
+        \PY{c+c1}{\PYZsh{} xlab \PYZam{} ylab \PYZhy{}\PYZgt{} x label and y label}
+        \PY{c+c1}{\PYZsh{} title \PYZhy{} main \PYZhy{}\PYZgt{} Main title}
+        \PY{c+c1}{\PYZsh{} title \PYZhy{} sub \PYZhy{}\PYZgt{} Sub title}
+        plot\PY{p}{(}sales1\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}}\PY{p}{,} ylim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{100}\PY{p}{)}\PY{p}{,} xlab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Month\PYZdq{}}\PY{p}{,} ylab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Sales\PYZdq{}} \PY{p}{)}
+        title\PY{p}{(}main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Sales by Month\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot a line using randomly generated data sales2. }
+        \PY{c+c1}{\PYZsh{} pch code 22 generates a square. }
+        \PY{c+c1}{\PYZsh{} lty \PYZhy{} Line type (Solid or Dashed Line)}
+        lines\PY{p}{(}sales2\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}}\PY{p}{,} pch\PY{o}{=}\PY{l+m}{22}\PY{p}{,} lty\PY{o}{=}\PY{l+m}{2}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}
+        grid\PY{p}{(}nx\PY{o}{=}\PY{k+kc}{NA}\PY{p}{,} ny\PY{o}{=}\PY{k+kc}{NULL}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Fix a legend in topright corner of the grid with a margin of .05. }
+        \PY{c+c1}{\PYZsh{} Create a vector (sales1, sales2) along with colors set as blue and red respectively.}
+        legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{topright\PYZdq{}}\PY{p}{,} inset\PY{o}{=}\PY{l+m}{.05}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Sales1\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Sales2\PYZdq{}}\PY{p}{)}\PY{p}{,} fill\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}\PY{p}{,} horiz\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 2}\label{problem-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} read.delim \PYZhy{}\PYZgt{} To read a delimited txt file. Here salesdata.txt is delimited with spaces.}
+         \PY{c+c1}{\PYZsh{} sales\PYZlt{}\PYZhy{}read.table(file.choose(), header=T)}
+         sales \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{salesdata.txt\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} sales
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ Sales1 & Sales2\\
+\hline
+	 34 & 45\\
+	 23 & 23\\
+	 12 & 56\\
+	 29 & 34\\
+	 34 & 45\\
+	 34 & 56\\
+	 12 & 89\\
+	 80 & 36\\
+	 80 & 44\\
+	 56 & 66\\
+	 55 & 60\\
+	 45 & 23\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} as.matrix \PYZhy{} \PYZgt{} Returns all values of vector into a matrix}
+         \PY{c+c1}{\PYZsh{} barplot \PYZhy{}\PYZgt{} Plot a bar plot using the data}
+         \PY{c+c1}{\PYZsh{} beside \PYZhy{}\PYZgt{} When False, they stack horizontally. When True, columns are potrayed as stacked bars.}
+         barplot\PY{p}{(}\PY{k+kp}{as.matrix}\PY{p}{(}sales\PY{p}{)}\PY{p}{,} main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Sales Data\PYZdq{}}\PY{p}{,} ylab\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total\PYZdq{}}\PY{p}{,}beside\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{,} col\PY{o}{=}rainbow\PY{p}{(}\PY{l+m}{5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 3}\label{problem-3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} boxplot for sales. Two colors for two columns}
+         fn\PY{o}{\PYZlt{}\PYZhy{}}boxplot\PY{p}{(}sales\PY{p}{,}col\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{orange\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{green\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZdl{}}stats
+         
+         \PY{c+c1}{\PYZsh{} fn converts a argument to function}
+         \PY{c+c1}{\PYZsh{} text places a text. }
+         \PY{c+c1}{\PYZsh{} cex \PYZhy{}\PYZgt{} Character size}
+         
+         text\PY{p}{(}\PY{l+m}{1.45}\PY{p}{,} fn\PY{p}{[}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} \PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Median =\PYZdq{}}\PY{p}{,} fn\PY{p}{[}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} adj\PY{o}{=}\PY{l+m}{0}\PY{p}{,} cex\PY{o}{=}\PY{l+m}{.7}\PY{p}{)}
+         text\PY{p}{(}\PY{l+m}{0.45}\PY{p}{,} fn\PY{p}{[}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Median =\PYZdq{}}\PY{p}{,} fn\PY{p}{[}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} adj\PY{o}{=}\PY{l+m}{0}\PY{p}{,} cex\PY{o}{=}\PY{l+m}{.7}\PY{p}{)}
+         grid\PY{p}{(}nx\PY{o}{=}\PY{k+kc}{NA}\PY{p}{,} ny\PY{o}{=}\PY{k+kc}{NULL}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 4}\label{problem-4}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Read FB.csv file to fb1 variable}
+         \PY{c+c1}{\PYZsh{} Similarly aapl1}
+         \PY{c+c1}{\PYZsh{} plot \PYZsq{}adj close\PYZsq{} from appl1 with blue color and with \PYZsq{}o\PYZsq{}.}
+         \PY{c+c1}{\PYZsh{} plot \PYZsq{}adj close\PYZsq{} from fb1 with red color and with a symbol \PYZsq{}pch = 22\PYZsq{}.}
+         \PY{c+c1}{\PYZsh{} Histogram of column \PYZsq{}Adj Close\PYZsq{} from appl1.}
+         
+         fb1\PY{o}{\PYZlt{}\PYZhy{}}read.csv\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{FB.csv\PYZsq{}}\PY{p}{)}
+         aapl1\PY{o}{\PYZlt{}\PYZhy{}}read.csv\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{AAPL.csv\PYZsq{}}\PY{p}{)}
+         par\PY{p}{(}bg\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{cornsilk\PYZdq{}}\PY{p}{)}
+         plot\PY{p}{(}aapl1\PY{o}{\PYZdl{}}Adj.Close\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}}\PY{p}{,} ylim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{400}\PY{p}{)}\PY{p}{,} xlab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Days\PYZdq{}}\PY{p}{,} ylab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Price\PYZdq{}} \PY{p}{)}
+         lines\PY{p}{(}fb1\PY{o}{\PYZdl{}}Adj.Close\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}}\PY{p}{,} pch\PY{o}{=}\PY{l+m}{22}\PY{p}{,} lty\PY{o}{=}\PY{l+m}{2}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}
+         legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{topright\PYZdq{}}\PY{p}{,} inset\PY{o}{=}\PY{l+m}{.05}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Apple\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Facebook\PYZdq{}}\PY{p}{)}\PY{p}{,} fill\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}\PY{p}{,} horiz\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+         hist\PY{p}{(}aapl1\PY{o}{\PYZdl{}}Adj.Close\PY{p}{,} col\PY{o}{=}rainbow\PY{p}{(}\PY{l+m}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 5}\label{problem-5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Displays all datasets.}
+         data\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kp}{head}\PY{p}{(}women\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ height & weight\\
+\hline
+	 58  & 115\\
+	 59  & 117\\
+	 60  & 120\\
+	 61  & 123\\
+	 62  & 126\\
+	 63  & 129\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k+kp}{summary}\PY{p}{(}women\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+     height         weight     
+ Min.   :58.0   Min.   :115.0  
+ 1st Qu.:61.5   1st Qu.:124.5  
+ Median :65.0   Median :135.0  
+ Mean   :65.0   Mean   :136.7  
+ 3rd Qu.:68.5   3rd Qu.:148.0  
+ Max.   :72.0   Max.   :164.0  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} plot\PY{p}{(}women\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kp}{head}\PY{p}{(}uspop\PY{p}{)}
+         plot\PY{p}{(}uspop\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 3.93
+\item 5.31
+\item 7.24
+\item 9.64
+\item 12.9
+\item 17.1
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 6}\label{problem-6}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Use libraries ggmap, maptools.}
+         \PY{c+c1}{\PYZsh{} register\PYZus{}google(Key = \PYZsq{}\PYZsq{}) \PYZhy{}\PYZgt{} API Key is given to access API.}
+         \PY{c+c1}{\PYZsh{} All the places to point on map are given into a vector named \PYZsq{}visited\PYZsq{}.}
+         \PY{c+c1}{\PYZsh{} Get Latitude and Longitude of each place and plot it on map.}
+         
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggmap\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{maptools\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}maps\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Please provide API. }
+         register\PYZus{}google\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{)} 
+         visited \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SFO\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Chennai\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{London\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Melbourne\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Lima,Peru\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Johannesbury, SA\PYZdq{}}\PY{p}{)}
+         ll.visited \PY{o}{\PYZlt{}\PYZhy{}} geocode\PY{p}{(}visited\PY{p}{)}
+         visit.x \PY{o}{\PYZlt{}\PYZhy{}} ll.visited\PY{o}{\PYZdl{}}lon
+         visit.y \PY{o}{\PYZlt{}\PYZhy{}} ll.visited\PY{o}{\PYZdl{}}lat
+         map\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{world\PYZdq{}}\PY{p}{,} fill\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{white\PYZdq{}}\PY{p}{,} bg\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{lightblue\PYZdq{}}\PY{p}{,} ylim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{\PYZhy{}60}\PY{p}{,} \PY{l+m}{90}\PY{p}{)}\PY{p}{,} mar\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{)}\PY{p}{)}
+         points\PY{p}{(}visit.x\PY{p}{,}visit.y\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,} pch\PY{o}{=}\PY{l+m}{36}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading required package: ggplot2
+Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
+Please cite ggmap if you use it! See citation("ggmap") for details.
+Loading required package: sp
+Checking rgeos availability: FALSE
+ 	Note: when rgeos is not available, polygon geometry 	computations in maptools depend on gpclib,
+ 	which has a restricted licence. It is disabled by default;
+ 	to enable gpclib, type gpclibPermit()
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=SFO\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Chennai\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=London\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Melbourne\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Lima,Peru\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Johannesbury,+SA\&key=xxx-Sm541do
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Use libraries ggmap, maptools.}
+         \PY{c+c1}{\PYZsh{} All the places to point on map are given into a vector named \PYZsq{}visited\PYZsq{}.}
+         \PY{c+c1}{\PYZsh{} Get Latitude and Longitude of each place and plot it on map.}
+         
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggmap\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{maptools\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}maps\PY{p}{)}
+         visited \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SFO\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{New York\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Buffalo\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Dallas, TX\PYZdq{}}\PY{p}{)}
+         ll.visited \PY{o}{\PYZlt{}\PYZhy{}} geocode\PY{p}{(}visited\PY{p}{)}
+         visit.x \PY{o}{\PYZlt{}\PYZhy{}} ll.visited\PY{o}{\PYZdl{}}lon
+         visit.y \PY{o}{\PYZlt{}\PYZhy{}} ll.visited\PY{o}{\PYZdl{}}lat
+         map\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{state\PYZdq{}}\PY{p}{,} fill\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,} col\PY{o}{=}rainbow\PY{p}{(}\PY{l+m}{50}\PY{p}{)}\PY{p}{,} bg\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{lightblue\PYZdq{}}\PY{p}{,} mar\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0}\PY{p}{)}\PY{p}{)}
+         points\PY{p}{(}visit.x\PY{p}{,}visit.y\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{yellow\PYZdq{}}\PY{p}{,} pch\PY{o}{=}\PY{l+m}{36}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=SFO\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Buffalo\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Dallas,+TX\&key=xxx-Sm541do
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 7}\label{problem-7}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k+kn}{attach}\PY{p}{(}mtcars\PY{p}{)}
+         \PY{k+kp}{head}\PY{p}{(}mtcars\PY{p}{)}
+         plot\PY{p}{(}mtcars\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}\PY{p}{]}\PY{p}{,} main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{MTCARS Data\PYZdq{}}\PY{p}{)}
+         plot\PY{p}{(}mtcars\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}\PY{p}{]}\PY{p}{,} main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{MTCARS Data\PYZdq{}}\PY{p}{)}
+         plot\PY{p}{(}mtcars\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}\PY{p}{]}\PY{p}{,} col\PY{o}{=}rainbow\PY{p}{(}\PY{l+m}{5}\PY{p}{)}\PY{p}{,}main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{MTCARS Data\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The following object is masked from package:ggplot2:
+
+    mpg
+
+
+    \end{Verbatim}
+
+    \begin{tabular}{r|lllllllllll}
+  & mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb\\
+\hline
+	Mazda RX4 & 21.0  & 6     & 160   & 110   & 3.90  & 2.620 & 16.46 & 0     & 1     & 4     & 4    \\
+	Mazda RX4 Wag & 21.0  & 6     & 160   & 110   & 3.90  & 2.875 & 17.02 & 0     & 1     & 4     & 4    \\
+	Datsun 710 & 22.8  & 4     & 108   &  93   & 3.85  & 2.320 & 18.61 & 1     & 1     & 4     & 1    \\
+	Hornet 4 Drive & 21.4  & 6     & 258   & 110   & 3.08  & 3.215 & 19.44 & 1     & 0     & 3     & 1    \\
+	Hornet Sportabout & 18.7  & 8     & 360   & 175   & 3.15  & 3.440 & 17.02 & 0     & 0     & 3     & 2    \\
+	Valiant & 18.1  & 6     & 225   & 105   & 2.76  & 3.460 & 20.22 & 1     & 0     & 3     & 1    \\
+\end{tabular}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k+kp}{head}\PY{p}{(}WWWusage\PY{p}{)}
+         plot\PY{p}{(}WWWusage\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}}\PY{p}{,}col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,}xlab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Minute\PYZdq{}}\PY{p}{,}ylab\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{No. of Visitors\PYZdq{}}\PY{p}{,}main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{No. of Visitors to the Serve \PYZbs{}n by Each Minute\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 88
+\item 84
+\item 85
+\item 85
+\item 84
+\item 85
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Problem 8}\label{problem-8}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+         ggplot\PY{p}{(}mtcars\PY{p}{,} aes\PY{p}{(}x\PY{o}{=}mpg\PY{p}{,} y\PY{o}{=}disp\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)}
+         
+         ggplot\PY{p}{(}mtcars\PY{p}{,} mapping \PY{o}{=} aes\PY{p}{(}x \PY{o}{=} disp\PY{p}{,} y \PY{o}{=} mpg\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)} \PY{o}{+} 
+           stat\PYZus{}smooth\PY{p}{(}method \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{lm\PYZsq{}}\PY{p}{)}
+         
+         ggplot\PY{p}{(}mtcars\PY{p}{,} mapping \PY{o}{=} aes\PY{p}{(}x \PY{o}{=} disp\PY{p}{,} y \PY{o}{=} mpg\PY{p}{,} color \PY{o}{=} \PY{k+kp}{as.factor}\PY{p}{(}cyl\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

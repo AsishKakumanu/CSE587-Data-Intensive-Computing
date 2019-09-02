@@ -1,0 +1,16 @@
+"0","library(""ggmap"")"
+"0","library(""maptools"")"
+"0","library(maps)"
+"0","visited <- c(""SFO"", ""New York"", ""Buffalo"", ""Dallas, TX"")"
+"0","ll.visited <- geocode(visited)"
+"2","Source : https://maps.googleapis.com/maps/api/geocode/json?address=SFO&key=xxx-Sm541do
+"
+"2","Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York&key=xxx-Sm541do
+"
+"2","Source : https://maps.googleapis.com/maps/api/geocode/json?address=Buffalo&key=xxx-Sm541do
+"
+"2","Source : https://maps.googleapis.com/maps/api/geocode/json?address=Dallas,+TX&key=xxx-Sm541do
+"
+"0","visit.x <- ll.visited$lon"
+"0","visit.y <- ll.visited$lat"
+"0","map(""state"", fill=TRUE, col=rainbow(50), bg=""lightblue"", mar=c(0,0,0,0))"

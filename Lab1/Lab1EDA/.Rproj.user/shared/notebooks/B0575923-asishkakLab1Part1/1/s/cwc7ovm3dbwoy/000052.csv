@@ -1,0 +1,1 @@
+"0","plot(WWWusage,type=""o"",col=""blue"",xlab=""Minute"",ylab=""No. of Visitors"",main=""No. of Visitors to the Serve \n by Each Minute"")"

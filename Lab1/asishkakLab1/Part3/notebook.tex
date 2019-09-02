@@ -1,0 +1,1412 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{swapnikalab1Part3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Search API}\label{search-api}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{twitteR\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{twitteR\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Keys}
+         api\PYZus{}key \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{XKCvkSC3TQDBJlLfaMJGbyuyT\PYZdq{}}
+         api\PYZus{}secret \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{SPkJ1siXeBh13GmwcrCYispF8eriDx7LQoIdMYfADodsG9neUe\PYZdq{}}
+         token \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{4808854766\PYZhy{}2b02ddivk2dSwqgJgtg5JLDCN741tCN0Q26ax3a\PYZdq{}} 
+         token\PYZus{}secret \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{laVPlvPitjdmlhXi0KorC9ODYa83XhAq98LyUAEC6EHkr\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Connecting to Twitter API}
+         setup\PYZus{}twitter\PYZus{}oauth\PY{p}{(}api\PYZus{}key\PY{p}{,}api\PYZus{}secret\PY{p}{,}token\PY{p}{,}token\PYZus{}secret\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Collect tweets}
+         tweets \PY{o}{\PYZlt{}\PYZhy{}} searchTwitter\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{flu OR influenza OR cold OR fever OR \PYZsh{}flu OR \PYZsh{}cold OR \PYZsh{}influenza OR \PYZsh{}fever\PYZdq{}}\PY{p}{,}n\PY{o}{=}\PY{l+m}{200}\PY{p}{,}lang\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{en\PYZdq{}}\PY{p}{,}since\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{2019\PYZhy{}01\PYZhy{}01\PYZdq{}}\PY{p}{,}geocode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{39.8,\PYZhy{}95.583068847656,2500km\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Using direct authentication"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} Saving tweets to a dataframe}
+         \PY{c+c1}{\PYZsh{}old\PYZus{}tweets \PYZlt{}\PYZhy{} readRDS(\PYZdq{}tweets.Rda\PYZdq{})}
+         new\PYZus{}tweets \PY{o}{\PYZlt{}\PYZhy{}} twListToDF\PY{p}{(}tweets\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kp}{nrow}\PY{p}{(}old\PYZus{}tweets\PY{p}{)}
+         \PY{k+kp}{nrow}\PY{p}{(}new\PYZus{}tweets\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Saving to a .csv File.}
+         \PY{c+c1}{\PYZsh{}write.table (tweets,\PYZdq{}tweets.csv\PYZdq{},append=TRUE,row.names = FALSE,col.names=TRUE,sep=\PYZdq{},\PYZdq{})}
+\end{Verbatim}
+
+
+    8400
+
+    
+    200
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} tweets \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{rbind}\PY{p}{(}old\PYZus{}tweets\PY{p}{,} new\PYZus{}tweets\PY{p}{)}
+         \PY{k+kp}{saveRDS}\PY{p}{(}tweets\PY{p}{,} file \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{tweets.Rda\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} tweets \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{readRDS}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{tweets.Rda\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} Reading .csv File}
+         \PY{c+c1}{\PYZsh{} tweets \PYZlt{}\PYZhy{} read.csv(\PYZdq{}tweets.csv\PYZdq{},header=TRUE, sep=\PYZdq{},\PYZdq{}, encoding = \PYZdq{}UCS\PYZhy{}2LE\PYZdq{})}
+         tweets \PY{o}{\PYZlt{}\PYZhy{}} new\PYZus{}tweets
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{k+kp}{nrow}\PY{p}{(}tweets\PY{p}{)}
+\end{Verbatim}
+
+
+    200
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} doInstall \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{TRUE}
+        toInstall \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{twitteR\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{dismo\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{maps\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{ggplot2\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggmap\PYZdq{}}\PY{p}{)}
+        \PY{k+kr}{if}\PY{p}{(}doInstall\PY{p}{)}\PY{p}{\PYZob{}}install.packages\PY{p}{(}toInstall\PY{p}{,} repos \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{http://cran.us.r\PYZhy{}project.org\PYZdq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+        \PY{k+kp}{lapply}\PY{p}{(}toInstall\PY{p}{,} \PY{k+kn}{library}\PY{p}{,} character.only \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
+Please cite ggmap if you use it! See citation("ggmap") for details.
+
+Attaching package: ‘ggmap’
+
+The following object is masked from ‘package:dismo’:
+
+    geocode
+
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\item \begin{enumerate*}
+\item 'ggplot2'
+\item 'maps'
+\item 'dismo'
+\item 'raster'
+\item 'sp'
+\item 'twitteR'
+\item 'jsonlite'
+\item 'formatR'
+\item 'stats'
+\item 'graphics'
+\item 'grDevices'
+\item 'utils'
+\item 'datasets'
+\item 'methods'
+\item 'base'
+\end{enumerate*}
+
+\item \begin{enumerate*}
+\item 'ggplot2'
+\item 'maps'
+\item 'dismo'
+\item 'raster'
+\item 'sp'
+\item 'twitteR'
+\item 'jsonlite'
+\item 'formatR'
+\item 'stats'
+\item 'graphics'
+\item 'grDevices'
+\item 'utils'
+\item 'datasets'
+\item 'methods'
+\item 'base'
+\end{enumerate*}
+
+\item \begin{enumerate*}
+\item 'ggplot2'
+\item 'maps'
+\item 'dismo'
+\item 'raster'
+\item 'sp'
+\item 'twitteR'
+\item 'jsonlite'
+\item 'formatR'
+\item 'stats'
+\item 'graphics'
+\item 'grDevices'
+\item 'utils'
+\item 'datasets'
+\item 'methods'
+\item 'base'
+\end{enumerate*}
+
+\item \begin{enumerate*}
+\item 'ggplot2'
+\item 'maps'
+\item 'dismo'
+\item 'raster'
+\item 'sp'
+\item 'twitteR'
+\item 'jsonlite'
+\item 'formatR'
+\item 'stats'
+\item 'graphics'
+\item 'grDevices'
+\item 'utils'
+\item 'datasets'
+\item 'methods'
+\item 'base'
+\end{enumerate*}
+
+\item \begin{enumerate*}
+\item 'ggmap'
+\item 'ggplot2'
+\item 'maps'
+\item 'dismo'
+\item 'raster'
+\item 'sp'
+\item 'twitteR'
+\item 'jsonlite'
+\item 'formatR'
+\item 'stats'
+\item 'graphics'
+\item 'grDevices'
+\item 'utils'
+\item 'datasets'
+\item 'methods'
+\item 'base'
+\end{enumerate*}
+
+\end{enumerate}
+
+
+    
+    \subsection{Looking up for User Info}\label{looking-up-for-user-info}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} userInf \PY{o}{\PYZlt{}\PYZhy{}} lookupUsers\PY{p}{(}tweets\PY{o}{\PYZdl{}}screenName\PY{p}{)}
+         userDetails \PY{o}{\PYZlt{}\PYZhy{}} twListToDF\PY{p}{(}userInf\PY{p}{)}  
+         
+         \PY{c+c1}{\PYZsh{} users with locations }
+         userLocationCheck \PY{o}{\PYZlt{}\PYZhy{}} \PY{o}{!}\PY{k+kp}{is.na}\PY{p}{(}userDetails\PY{o}{\PYZdl{}}location\PY{p}{)}
+         userLocation \PY{o}{\PYZlt{}\PYZhy{}} userDetails\PY{o}{\PYZdl{}}location\PY{p}{[}userLocationCheck\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{Getting geocode of tweets}\label{getting-geocode-of-tweets}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}install.packages(\PYZdq{}xml2\PYZdq{})}
+        \PY{c+c1}{\PYZsh{}install.packages(\PYZdq{}XML\PYZdq{}, repos = \PYZdq{}http://www.omegahat.org/R\PYZdq{})}
+        \PY{c+c1}{\PYZsh{}devtools::install\PYZus{}github(\PYZdq{}r\PYZhy{}lib/xml2\PYZdq{})}
+        \PY{k+kn}{library}\PY{p}{(}plyr\PY{p}{)}
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{XML\PYZsq{}}\PY{p}{,}repos\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{http://cran.us.r\PYZhy{}project.org\PYZsq{}}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}XML\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggmap\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}ggmap\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}dismo\PY{p}{)}
+         register\PYZus{}google\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN\PYZhy{}Sm541do\PYZdq{}}\PY{p}{)} 
+         code \PY{o}{\PYZlt{}\PYZhy{}} ggmap\PY{o}{::}geocode\PY{p}{(}userDetails\PY{o}{\PYZdl{}}location\PY{p}{[}userLocationCheck\PY{p}{]}\PY{p}{,}output \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{more\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Los+Angeles,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Somewhere+near+chicago\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=mindin+my+bizznnaaeee\&key=xxx-Sm541do
+Warning message:
+“Geocoding "mindin my bizznna{\ldots}" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Dirty+Myrtle\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Texas,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=California,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=University+of+Oregon\&key=xxx-Sm541do
+"University of Oregon" not uniquely geocoded, using "1585 e 13th ave, eugene, or 97403, usa"
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Stu\%F0\%9F\%8E\%B6\&key=xxx-Sm541do
+Warning message:
+“Geocoding "Stu🎶" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Pennsylvania,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=w+isick\%F0\%9F\%92\%9B\%F0\%9F\%91\%BE\&key=xxx-Sm541do
+Warning message:
+“Geocoding "w isick💛👾" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Kennesaw,+GA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=West+Michigan\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Pittsburgh\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Letting+my+Freak+Flag+fly\&key=xxx-Sm541do
+Warning message:
+“Geocoding "Letting my Freak {\ldots}" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Eastern+Time+Zone\&key=xxx-Sm541do
+"Eastern Time Zone" not uniquely geocoded, using "630 old country rd, garden city, ny 11530, usa"
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Seattle,+WA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Memphis\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Toronto\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+Jersey,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Los+Angeles,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Pewaukee,+WI\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=704\%E2\%9E\%A1336\&key=xxx-Sm541do
+Warning message:
+“Geocoding "704➡336" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=area+51\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=CC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Kentucky,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Butte,+MT\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Windham,+OH\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Clinton,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Urbana,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Pampa,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=San+Francisco,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Long+Beach,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Houston+Tx\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Milwaukee,+WI\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Virginia,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Chino+Hills,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Emmett,+ID\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Arizona\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=San+Jose,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Texas,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+Jersey,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Moe+Bill\&key=xxx-Sm541do
+Warning message:
+“Geocoding "Moe Bill" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Washington,+USA\&key=xxx-Sm541do
+"Washington, USA" not uniquely geocoded, using "washington, usa"
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=San+Diego,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=United+States\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=California,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Portland,+Oregon\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=blacklivesmatter\&key=xxx-Sm541do
+Warning message:
+“Geocoding "blacklivesmatter" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Denver\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Los+Angeles,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=\&key=xxx-Sm541do
+Warning message in geocode(.x, output = output, source = source, messaging = messaging, :
+“HTTP 400 Bad Request”Source : https://maps.googleapis.com/maps/api/geocode/json?address=probably+have+dutch+in+my+hand\&key=xxx-Sm541do
+Warning message:
+“Geocoding "probably have dut{\ldots}" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Somewhere+Near+Nowhere\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Australia\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Port+St.+Lucie,+FL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Chicago,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Porterville,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Montreal\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Hamilton,+Ontario\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=bay+area\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Fuckry\&key=xxx-Sm541do
+Warning message:
+“Geocoding "Fuckry " failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Garland,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Mesa,+AZ\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Philadelphia\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Frankfort,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Tennessee,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=manchester,+ky\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=South+Carolina,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Washington,+USA\&key=xxx-Sm541do
+"Washington, USA" not uniquely geocoded, using "washington, usa"
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Wilkes-Barre,+PA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Marshalltown,+IA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Norfolk,+VA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Boston,+MA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Tijuana+-+San+Diego\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Rootstown,+Ohio\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Location\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Hollywood,+Los+Angeles\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Worcester,+MA///Springfield,+MA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Anderson,+SC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Salt+Lake+City,+UT\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=C-U,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Salinas,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=West+Des+Moines,+IA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Chagrin+Falls,+OH\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Portland,+OR\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Minnesota\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=avengers+tower\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=United+States\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=in+my+bed\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=United+States\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York+City\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Pond+Creek,+OK\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York,+NY\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=at+the+dog+park\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Durham,+NC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Texas,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Milwaukee,+WI\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Bay+Area,+California\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Los+Angeles,+CA,+USA,+Earth\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Waukegan,Illinois\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Braintree,+MA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Houston,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Indianapolis\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=la+la+land\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Charlotte,+NC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=London,+England\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Santiago,+Chile\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Leonard+Tx\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=m+\%E2\%80\%A2+r+\%E2\%80\%A2+t+\%E2\%80\%A2+c+\%E2\%80\%A2+m\&key=xxx-Sm541do
+Warning message:
+“Geocoding "m • r • t • c • m" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Hell\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=nola\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Western+NY\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Princeton,+NJ\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=United+States\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Death+Row\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Old+Bridge,+NJ\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=ONTARIO+CANADA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Louisiana,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=United+States\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Somewhere+in+Texas\&key=xxx-Sm541do
+"Somewhere in Texas " not uniquely geocoded, using "15477 markout central, forney, tx 75126, usa"
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Greensboro,+NC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=In+aisle+3+of+5th+\&+Fashion\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Indiana,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Kalamazoo,+MI\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Traveling+the+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Garden+Grove,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Washington,+DC\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=334\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Akron,+OH\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=in+bed\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Georgia\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Illinois,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=North+Dakota,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=smoking+a+phatwoods\&key=xxx-Sm541do
+Warning message:
+“Geocoding "smoking a phatwoods" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Malibu,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=ur+ma\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Grandview,+WA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Ontario,+Canada\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Texas,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=ATL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Salt+Lake+City,+UT\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=en+route\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Brockton,+MA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Phoenix,+AZ\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+Jersey\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Southern+California\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Chicago,+IL\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=ayy+lmao\&key=xxx-Sm541do
+Warning message:
+“Geocoding "ayy lmao " failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Seattle,+WA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Canada\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=slytherin\&key=xxx-Sm541do
+Warning message:
+“Geocoding "slytherin" failed with error:
+
+”Source : https://maps.googleapis.com/maps/api/geocode/json?address=Lex+Corp\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Georgia\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+york\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Fayetteville,+AR\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Odessa,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Houston,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Oklahoma+City,+OK\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=North+Carolina,+USA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Prosper,+TX\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=St+Louis,+MO\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Palmdale,+CA\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=Bridgeport,+Chicago\&key=xxx-Sm541do
+Source : https://maps.googleapis.com/maps/api/geocode/json?address=New+York\&key=xxx-Sm541do
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} Omitting NA values from the }
+         code \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}code\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} Removing all the outliers from the map. }
+         install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{tidyverse\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}tidyverse\PY{p}{)}
+         code \PY{o}{\PYZlt{}\PYZhy{}} code \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+           filter\PY{p}{(}endsWith\PY{p}{(}code\PY{o}{\PYZdl{}}address\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{usa\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} omitting NA values from the dataframe.}
+        \PY{c+c1}{\PYZsh{} Not needed}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} DONT RUN \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        lon \PY{o}{=} na.omit\PY{p}{(}code\PY{o}{\PYZdl{}}lon\PY{p}{)}
+        lat \PY{o}{=} na.omit\PY{p}{(}code\PY{o}{\PYZdl{}}lat\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} tweets
+\end{Verbatim}
+
+
+    \subsection{Reverse Geocode}\label{reverse-geocode}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{revgeo\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}revgeo\PY{p}{)}
+         reved \PY{o}{\PYZlt{}\PYZhy{}} revgeo\PY{p}{(}longitude\PY{o}{=}code\PY{o}{\PYZdl{}}lon\PY{p}{,} latitude\PY{o}{=}code\PY{o}{\PYZdl{}}lat\PY{p}{,} provider\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{google\PYZsq{}}\PY{p}{,} API\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN\PYZhy{}Sm541do\PYZsq{}}\PY{p}{,}output\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{frame\PYZdq{}}\PY{p}{)}
+         reved\PY{o}{\PYZdl{}}state
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0522342,-118.2436849\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.8795845,-87.6237133\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.7019502,-78.8713695\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=31.9685988,-99.9018131\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.778261,-119.4179324\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=44.0448302,-123.0726055\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.2033216,-77.1945247\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0234337,-84.6154897\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=44.3148443,-85.6023643\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7127753,-74.0059728\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.4406248,-79.9958864\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7377635,-73.6130142\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062095,-122.3320708\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.1495343,-90.0489801\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.0583238,-74.4056612\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0522342,-118.2436849\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.0542058,-88.2169027\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.2371623,-115.8018432\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.0859878,-97.0996829\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.8393332,-84.2700179\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=46.0038232,-112.5347775\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.2350562,-81.0492611\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.1536479,-88.9645253\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.1105875,-88.2072697\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.5361559,-100.9598709\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.7749295,-122.4194155\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.7700504,-118.1937395\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=29.7604267,-95.3698028\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.0389025,-87.9064736\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.4315734,-78.6568942\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.9898188,-117.7325848\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.8734978,-116.4993012\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0489281,-111.0937311\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.3382082,-121.8863286\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=31.9685988,-99.9018131\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.0583238,-74.4056612\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=47.7510741,-120.7401385\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=32.715738,-117.1610838\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.778261,-119.4179324\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=45.5122308,-122.6587185\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=39.7392358,-104.990251\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0522342,-118.2436849\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=38.2378497,-85.7194096\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=27.2730492,-80.3582261\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.8781136,-87.6297982\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.06523,-119.0167679\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.8271784,-122.2913078\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=32.912624,-96.6388833\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.4151843,-111.8314724\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=39.9525839,-75.1652215\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.4958665,-87.8486613\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.5174913,-86.5804473\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.1537007,-83.7618641\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.836081,-81.1637245\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=47.7510741,-120.7401385\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.2459149,-75.8813075\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.0494674,-92.9080375\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.8507689,-76.2858726\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.3600825,-71.0588801\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.0871792,-81.229853\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.09024,-95.712891\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0928092,-118.3286614\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.2612403,-71.7949707\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.5034394,-82.6501332\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7607793,-111.8910474\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.988863,-88.690766\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.6777372,-121.6555013\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.5638902,-93.7593841\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.4298516,-81.3910999\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=45.5122308,-122.6587185\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=46.729553,-94.6858998\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=45.4899538,-122.7852368\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=44.1068197,-103.2112366\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7127753,-74.0059728\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.6691969,-97.8011661\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7127753,-74.0059728\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.2724112,-95.8698263\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.9940329,-78.898619\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=31.9685988,-99.9018131\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.0389025,-87.9064736\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=37.8271784,-122.2913078\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0522342,-118.2436849\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.3636331,-87.8447938\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.2079017,-71.0040013\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=29.7604267,-95.3698028\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=39.768403,-86.158068\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=26.3496347,-80.2289571\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.2270869,-80.8431267\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.3795549,-96.2474785\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.43472,-83.985\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=29.9510658,-90.0715323\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.3447295,-75.3878525\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.3572976,-74.6672226\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0638086,-118.3719011\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.4128551,-74.307282\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=30.9842977,-91.9623327\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=32.7138476,-96.5149979\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.0726354,-79.7919754\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.7642502,-84.3502888\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.2671941,-86.1349019\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.2917069,-85.5872286\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=43.2136626,-77.439723\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.7742692,-117.9379952\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=38.9071923,-77.0368707\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.5300844,-95.9194103\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.0814447,-81.5190053\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.109599,-97.054228\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=32.1656221,-82.9000751\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.6331249,-89.3985283\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=47.5514926,-101.0020119\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.0259216,-118.7797571\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=46.2509653,-119.9017049\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=31.9685988,-99.9018131\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.6407282,-84.4277001\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7607793,-111.8910474\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=42.0834335,-71.0183787\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.4483771,-112.0740373\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.0583238,-74.4056612\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.9592083,-116.419389\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.8781136,-87.6297982\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062095,-122.3320708\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=32.1656221,-82.9000751\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7127753,-74.0059728\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=36.082156,-94.1718542\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=31.8456816,-102.3676431\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=29.7604267,-95.3698028\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.4675602,-97.5164276\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=35.7595731,-79.0192997\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=33.2362278,-96.80111\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=38.6270025,-90.1994042\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=34.5794343,-118.1164613\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=41.8364162,-87.6486609\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+[1] "Getting geocode data from Google: https://maps.googleapis.com/maps/api/geocode/json?latlng=40.7127753,-74.0059728\&key=AIzaSyBMEQodtdMh7x22Z9QwzUyIZnN-Sm541do"
+
+    \end{Verbatim}
+
+    \begin{enumerate*}
+\item California
+\item Illinois
+\item South Carolina
+\item Texas
+\item California
+\item Oregon
+\item Pennsylvania
+\item Georgia
+\item Michigan
+\item New York
+\item Pennsylvania
+\item New York
+\item Washington
+\item Tennessee
+\item New Jersey
+\item California
+\item Wisconsin
+\item Nevada
+\item Kansas
+\item Kentucky
+\item Montana
+\item Ohio
+\item Illinois
+\item Illinois
+\item Texas
+\item California
+\item California
+\item Texas
+\item Wisconsin
+\item Virginia
+\item California
+\item Idaho
+\item Arizona
+\item California
+\item Texas
+\item New Jersey
+\item Washington
+\item California
+\item California
+\item Oregon
+\item Colorado
+\item California
+\item Kentucky
+\item Florida
+\item Illinois
+\item California
+\item California
+\item Texas
+\item Arizona
+\item Pennsylvania
+\item Illinois
+\item Tennessee
+\item Kentucky
+\item South Carolina
+\item Washington
+\item Pennsylvania
+\item Iowa
+\item Virginia
+\item Massachusetts
+\item Ohio
+\item Kansas
+\item California
+\item Massachusetts
+\item South Carolina
+\item Utah
+\item Illinois
+\item California
+\item Iowa
+\item Ohio
+\item Oregon
+\item Minnesota
+\item Oregon
+\item South Dakota
+\item New York
+\item Oklahoma
+\item New York
+\item Oklahoma
+\item North Carolina
+\item Texas
+\item Wisconsin
+\item California
+\item California
+\item Illinois
+\item Massachusetts
+\item Texas
+\item Indiana
+\item Florida
+\item North Carolina
+\item Texas
+\item Michigan
+\item Louisiana
+\item New York
+\item New Jersey
+\item California
+\item New Jersey
+\item Louisiana
+\item Texas
+\item North Carolina
+\item Georgia
+\item Indiana
+\item Michigan
+\item New York
+\item California
+\item District of Columbia
+\item Oklahoma
+\item Ohio
+\item Oklahoma
+\item Georgia
+\item Illinois
+\item North Dakota
+\item California
+\item Washington
+\item Texas
+\item Georgia
+\item Utah
+\item Massachusetts
+\item Arizona
+\item New Jersey
+\item California
+\item Illinois
+\item Washington
+\item Georgia
+\item New York
+\item Arkansas
+\item Texas
+\item Texas
+\item Oklahoma
+\item North Carolina
+\item Texas
+\item Missouri
+\item California
+\item Illinois
+\item New York
+\end{enumerate*}
+
+\emph{Levels}: \begin{enumerate*}
+\item 'Arizona'
+\item 'Arkansas'
+\item 'California'
+\item 'Colorado'
+\item 'District of Columbia'
+\item 'Florida'
+\item 'Georgia'
+\item 'Idaho'
+\item 'Illinois'
+\item 'Indiana'
+\item 'Iowa'
+\item 'Kansas'
+\item 'Kentucky'
+\item 'Louisiana'
+\item 'Massachusetts'
+\item 'Michigan'
+\item 'Minnesota'
+\item 'Missouri'
+\item 'Montana'
+\item 'Nevada'
+\item 'New Jersey'
+\item 'New York'
+\item 'North Carolina'
+\item 'North Dakota'
+\item 'Ohio'
+\item 'Oklahoma'
+\item 'Oregon'
+\item 'Pennsylvania'
+\item 'South Carolina'
+\item 'South Dakota'
+\item 'Tennessee'
+\item 'Texas'
+\item 'Utah'
+\item 'Virginia'
+\item 'Washington'
+\item 'Wisconsin'
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} Freq\PYZus{}frame \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}\PY{k+kp}{table}\PY{p}{(}reved\PY{o}{\PYZdl{}}state\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} Freq\PYZus{}frame
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ Var1 & Freq\\
+\hline
+	 Arizona              &  3                  \\
+	 Arkansas             &  1                  \\
+	 California           & 21                  \\
+	 Colorado             &  1                  \\
+	 District of Columbia &  1                  \\
+	 Florida              &  2                  \\
+	 Georgia              &  5                  \\
+	 Idaho                &  1                  \\
+	 Illinois             & 10                  \\
+	 Indiana              &  2                  \\
+	 Iowa                 &  2                  \\
+	 Kansas               &  2                  \\
+	 Kentucky             &  3                  \\
+	 Louisiana            &  2                  \\
+	 Massachusetts        &  4                  \\
+	 Michigan             &  3                  \\
+	 Minnesota            &  1                  \\
+	 Missouri             &  1                  \\
+	 Montana              &  1                  \\
+	 Nevada               &  1                  \\
+	 New Jersey           &  5                  \\
+	 New York             &  8                  \\
+	 North Carolina       &  4                  \\
+	 North Dakota         &  1                  \\
+	 Ohio                 &  4                  \\
+	 Oklahoma             &  5                  \\
+	 Oregon               &  4                  \\
+	 Pennsylvania         &  4                  \\
+	 South Carolina       &  3                  \\
+	 South Dakota         &  1                  \\
+	 Tennessee            &  2                  \\
+	 Texas                & 13                  \\
+	 Utah                 &  2                  \\
+	 Virginia             &  2                  \\
+	 Washington           &  5                  \\
+	 Wisconsin            &  3                  \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggmap\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{maptools\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{maps\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggplot2\PYZdq{}}\PY{p}{)}
+         
+         referencedata \PY{o}{=} map\PYZus{}data\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{state\PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{head}\PY{p}{(}referencedata\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Checking rgeos availability: FALSE
+ 	Note: when rgeos is not available, polygon geometry 	computations in maptools depend on gpclib,
+ 	which has a restricted licence. It is disabled by default;
+ 	to enable gpclib, type gpclibPermit()
+
+    \end{Verbatim}
+
+    \begin{tabular}{r|llllll}
+ long & lat & group & order & region & subregion\\
+\hline
+	 -87.46201 & 30.38968  & 1         & 1         & alabama   & NA       \\
+	 -87.48493 & 30.37249  & 1         & 2         & alabama   & NA       \\
+	 -87.52503 & 30.37249  & 1         & 3         & alabama   & NA       \\
+	 -87.53076 & 30.33239  & 1         & 4         & alabama   & NA       \\
+	 -87.57087 & 30.32665  & 1         & 5         & alabama   & NA       \\
+	 -87.58806 & 30.32665  & 1         & 6         & alabama   & NA       \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} state\PYZus{}and\PYZus{}levels \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}Freq\PYZus{}frame\PY{o}{\PYZdl{}}Var1\PY{p}{,} Freq\PYZus{}frame\PY{o}{\PYZdl{}}Freq\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} state\PYZus{}and\PYZus{}levels
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ Freq\_frame.Var1 & Freq\_frame.Freq\\
+\hline
+	 Arizona              &  3                  \\
+	 Arkansas             &  1                  \\
+	 California           & 21                  \\
+	 Colorado             &  1                  \\
+	 District of Columbia &  1                  \\
+	 Florida              &  2                  \\
+	 Georgia              &  5                  \\
+	 Idaho                &  1                  \\
+	 Illinois             & 10                  \\
+	 Indiana              &  2                  \\
+	 Iowa                 &  2                  \\
+	 Kansas               &  2                  \\
+	 Kentucky             &  3                  \\
+	 Louisiana            &  2                  \\
+	 Massachusetts        &  4                  \\
+	 Michigan             &  3                  \\
+	 Minnesota            &  1                  \\
+	 Missouri             &  1                  \\
+	 Montana              &  1                  \\
+	 Nevada               &  1                  \\
+	 New Jersey           &  5                  \\
+	 New York             &  8                  \\
+	 North Carolina       &  4                  \\
+	 North Dakota         &  1                  \\
+	 Ohio                 &  4                  \\
+	 Oklahoma             &  5                  \\
+	 Oregon               &  4                  \\
+	 Pennsylvania         &  4                  \\
+	 South Carolina       &  3                  \\
+	 South Dakota         &  1                  \\
+	 Tennessee            &  2                  \\
+	 Texas                & 13                  \\
+	 Utah                 &  2                  \\
+	 Virginia             &  2                  \\
+	 Washington           &  5                  \\
+	 Wisconsin            &  3                  \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} region\PYZus{}level \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+         \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}referencedata\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+             region \PY{o}{=} referencedata\PY{o}{\PYZdl{}}region\PY{p}{[}i\PY{p}{]}
+             index \PY{o}{=} \PY{k+kp}{grep}\PY{p}{(}region\PY{p}{,} \PY{k+kp}{tolower}\PY{p}{(}state\PYZus{}and\PYZus{}levels\PY{o}{\PYZdl{}}Freq\PYZus{}frame.Var1\PY{p}{)}\PY{p}{)}
+             region\PYZus{}level \PY{o}{=} \PY{k+kp}{append}\PY{p}{(}region\PYZus{}level\PY{p}{,} state\PYZus{}and\PYZus{}levels\PY{o}{\PYZdl{}}Freq\PYZus{}frame.Freq\PY{p}{[}index\PY{p}{[}\PY{l+m}{1}\PY{p}{]]}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         
+         referencedata\PY{o}{\PYZdl{}}region\PYZus{}level \PY{o}{=} region\PYZus{}level
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{k+kp}{table}\PY{p}{(}referencedata\PY{o}{\PYZdl{}}region\PYZus{}level\PY{p}{)}
+         referencedata\PY{o}{\PYZdl{}}final\PYZus{}regionlevel \PY{o}{=} \PY{k+kp}{sapply}\PY{p}{(}referencedata\PY{o}{\PYZdl{}}region\PYZus{}level\PY{p}{,} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Minimal\PYZdq{}}\PY{p}{,} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Low\PYZdq{}}\PY{p}{,} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Moderate\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{High\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+   1    2    3    4    5    8   10   13   21 
+2014 3117 2068 1714 1415  495  329 1088  516 
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} new \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}\PY{k+kp}{table}\PY{p}{(}referencedata\PY{o}{\PYZdl{}}region\PYZus{}level\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} referencedata
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllll}
+  & long & lat & group & order & region & subregion & region\_level & final\_regionlevel\\
+\hline
+	1 & -87.46201 & 30.38968  & 1         &  1        & alabama   & NA        & NA        & High     \\
+	2 & -87.48493 & 30.37249  & 1         &  2        & alabama   & NA        & NA        & High     \\
+	3 & -87.52503 & 30.37249  & 1         &  3        & alabama   & NA        & NA        & High     \\
+	4 & -87.53076 & 30.33239  & 1         &  4        & alabama   & NA        & NA        & High     \\
+	5 & -87.57087 & 30.32665  & 1         &  5        & alabama   & NA        & NA        & High     \\
+	6 & -87.58806 & 30.32665  & 1         &  6        & alabama   & NA        & NA        & High     \\
+	7 & -87.59379 & 30.30947  & 1         &  7        & alabama   & NA        & NA        & High     \\
+	8 & -87.59379 & 30.28655  & 1         &  8        & alabama   & NA        & NA        & High     \\
+	9 & -87.67400 & 30.27509  & 1         &  9        & alabama   & NA        & NA        & High     \\
+	10 & -87.81152 & 30.25790  & 1         & 10        & alabama   & NA        & NA        & High     \\
+	11 & -87.88026 & 30.24644  & 1         & 11        & alabama   & NA        & NA        & High     \\
+	12 & -87.92037 & 30.24644  & 1         & 12        & alabama   & NA        & NA        & High     \\
+	13 & -87.95475 & 30.24644  & 1         & 13        & alabama   & NA        & NA        & High     \\
+	14 & -88.00632 & 30.24071  & 1         & 14        & alabama   & NA        & NA        & High     \\
+	15 & -88.01778 & 30.25217  & 1         & 15        & alabama   & NA        & NA        & High     \\
+	16 & -88.01205 & 30.26936  & 1         & 16        & alabama   & NA        & NA        & High     \\
+	17 & -87.99486 & 30.27509  & 1         & 17        & alabama   & NA        & NA        & High     \\
+	18 & -87.95475 & 30.27509  & 1         & 18        & alabama   & NA        & NA        & High     \\
+	19 & -87.90318 & 30.28082  & 1         & 19        & alabama   & NA        & NA        & High     \\
+	20 & -87.82870 & 30.28655  & 1         & 20        & alabama   & NA        & NA        & High     \\
+	21 & -87.80006 & 30.28655  & 1         & 21        & alabama   & NA        & NA        & High     \\
+	22 & -87.80006 & 30.32665  & 1         & 22        & alabama   & NA        & NA        & High     \\
+	23 & -87.81724 & 30.34385  & 1         & 23        & alabama   & NA        & NA        & High     \\
+	24 & -87.84016 & 30.38395  & 1         & 24        & alabama   & NA        & NA        & High     \\
+	25 & -87.85162 & 30.40114  & 1         & 25        & alabama   & NA        & NA        & High     \\
+	26 & -87.87453 & 30.41260  & 1         & 26        & alabama   & NA        & NA        & High     \\
+	27 & -87.90318 & 30.42406  & 1         & 27        & alabama   & NA        & NA        & High     \\
+	28 & -87.92610 & 30.44698  & 1         & 28        & alabama   & NA        & NA        & High     \\
+	29 & -87.93183 & 30.49281  & 1         & 29        & alabama   & NA        & NA        & High     \\
+	30 & -87.94329 & 30.52719  & 1         & 30        & alabama   & NA        & NA        & High     \\
+	⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮ & ⋮\\
+	15570 & -105.0289 & 45.00583  & 63        & 15570     & wyoming   & NA        & NA        & High     \\
+	15571 & -104.9258 & 45.00583  & 63        & 15571     & wyoming   & NA        & NA        & High     \\
+	15572 & -104.7825 & 45.00583  & 63        & 15572     & wyoming   & NA        & NA        & High     \\
+	15573 & -104.5820 & 45.00583  & 63        & 15573     & wyoming   & NA        & NA        & High     \\
+	15574 & -104.3413 & 45.00583  & 63        & 15574     & wyoming   & NA        & NA        & High     \\
+	15575 & -104.1580 & 45.00583  & 63        & 15575     & wyoming   & NA        & NA        & High     \\
+	15576 & -104.0549 & 45.00583  & 63        & 15576     & wyoming   & NA        & NA        & High     \\
+	15577 & -104.0549 & 44.58185  & 63        & 15577     & wyoming   & NA        & NA        & High     \\
+	15578 & -104.0549 & 44.18077  & 63        & 15578     & wyoming   & NA        & NA        & High     \\
+	15579 & -104.0606 & 44.13494  & 63        & 15579     & wyoming   & NA        & NA        & High     \\
+	15580 & -104.0549 & 43.84846  & 63        & 15580     & wyoming   & NA        & NA        & High     \\
+	15581 & -104.0606 & 43.49895  & 63        & 15581     & wyoming   & NA        & NA        & High     \\
+	15582 & -104.0663 & 43.47604  & 63        & 15582     & wyoming   & NA        & NA        & High     \\
+	15583 & -104.0606 & 43.00621  & 63        & 15583     & wyoming   & NA        & NA        & High     \\
+	15584 & -104.0606 & 42.61087  & 63        & 15584     & wyoming   & NA        & NA        & High     \\
+	15585 & -104.0549 & 41.99781  & 63        & 15585     & wyoming   & NA        & NA        & High     \\
+	15586 & -104.0606 & 41.69987  & 63        & 15586     & wyoming   & NA        & NA        & High     \\
+	15587 & -104.0606 & 41.56236  & 63        & 15587     & wyoming   & NA        & NA        & High     \\
+	15588 & -104.0606 & 41.39620  & 63        & 15588     & wyoming   & NA        & NA        & High     \\
+	15589 & -104.0606 & 41.00659  & 63        & 15589     & wyoming   & NA        & NA        & High     \\
+	15590 & -104.9429 & 41.01232  & 63        & 15590     & wyoming   & NA        & NA        & High     \\
+	15591 & -105.2867 & 41.00659  & 63        & 15591     & wyoming   & NA        & NA        & High     \\
+	15592 & -106.2092 & 41.01232  & 63        & 15592     & wyoming   & NA        & NA        & High     \\
+	15593 & -106.2035 & 41.00659  & 63        & 15593     & wyoming   & NA        & NA        & High     \\
+	15594 & -106.3295 & 41.00659  & 63        & 15594     & wyoming   & NA        & NA        & High     \\
+	15595 & -106.8566 & 41.01232  & 63        & 15595     & wyoming   & NA        & NA        & High     \\
+	15596 & -107.3093 & 41.01805  & 63        & 15596     & wyoming   & NA        & NA        & High     \\
+	15597 & -107.9223 & 41.01805  & 63        & 15597     & wyoming   & NA        & NA        & High     \\
+	15598 & -109.0568 & 40.98940  & 63        & 15598     & wyoming   & NA        & NA        & High     \\
+	15599 & -109.0511 & 40.99513  & 63        & 15599     & wyoming   & NA        & NA        & High     \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{k+kp}{options}\PY{p}{(}repr.plot.width\PY{o}{=}\PY{l+m}{4}\PY{p}{,} repr.plot.height\PY{o}{=}\PY{l+m}{2}\PY{p}{)}
+          plot \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}referencedata\PY{p}{,} aes\PY{p}{(}referencedata\PY{o}{\PYZdl{}}long\PY{p}{,} referencedata\PY{o}{\PYZdl{}}lat\PY{p}{)}\PY{p}{)} \PY{o}{+}
+            geom\PYZus{}polygon\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} group\PY{p}{,} fill \PY{o}{=} referencedata\PY{o}{\PYZdl{}}final\PYZus{}regionlevel\PY{p}{)}\PY{p}{,}color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{white\PYZdq{}}\PY{p}{)} \PY{o}{+} 
+            scale\PYZus{}fill\PYZus{}manual\PY{p}{(}name\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ILI Activity Level\PYZdq{}}\PY{p}{,}values \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}43CD80\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}76EE00\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}EE9A00\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{+}coord\PYZus{}quickmap\PY{p}{(}\PY{p}{)} \PY{o}{+} theme\PY{p}{(}panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+                  theme\PY{p}{(}panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                  theme\PY{p}{(}axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+                  theme\PY{p}{(}axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} labs\PY{p}{(}x \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} y \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{)} \PY{o}{+}ggtitle\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza Twitter Analysis, 2019\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} plot
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Alternative :: Stream API}\label{alternative-stream-api}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ROAuth\PYZdq{}}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}ROAuth\PY{p}{)}
+        requestURL \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{https://api.twitter.com/oauth/request\PYZus{}token\PYZdq{}}
+        accessURL \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{https://api.twitter.com/oauth/access\PYZus{}token\PYZdq{}}
+        authURL \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{https://api.twitter.com/oauth/authorize\PYZdq{}}
+        consumerKey \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{XKCvkSC3TQDBJlLfaMJGbyuyT\PYZdq{}}
+        consumerSecret \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{SPkJ1siXeBh13GmwcrCYispF8eriDx7LQoIdMYfADodsG9neUe\PYZdq{}}
+        
+        my\PYZus{}oauth \PY{o}{\PYZlt{}\PYZhy{}} OAuthFactory\PY{o}{\PYZdl{}}new\PY{p}{(}consumerKey\PY{o}{=}consumerKey\PY{p}{,}
+          consumerSecret\PY{o}{=}consumerSecret\PY{p}{,} requestURL\PY{o}{=}requestURL\PY{p}{,}
+          accessURL\PY{o}{=}accessURL\PY{p}{,} authURL\PY{o}{=}authURL\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} my\PYZus{}oauth\PY{o}{\PYZdl{}}handshake\PY{p}{(}cainfo \PY{o}{=} \PY{k+kp}{system.file}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{CurlSSL\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{cacert.pem\PYZdq{}}\PY{p}{,} package \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{RCurl\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{save}\PY{p}{(}my\PYZus{}oauth\PY{p}{,} file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{twitter\PYZhy{}token.Rdata\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{streamR\PYZdq{}}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}streamR\PY{p}{)}
+        \PY{k+kp}{load}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{twitter\PYZhy{}token.Rdata\PYZdq{}}\PY{p}{)}
+         
+        filterStream\PY{p}{(}file.name \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{tweets1.json\PYZdq{}}\PY{p}{,} \PY{c+c1}{\PYZsh{} Save tweets in a json file}
+                     track \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{flu\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} Collect tweets mentioning either Affordable Care Act, ACA, or Obamacare}
+                     language \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{en\PYZdq{}}\PY{p}{,}
+                     location \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{\PYZhy{}125}\PY{p}{,} \PY{l+m}{25}\PY{p}{,} \PY{l+m}{\PYZhy{}66}\PY{p}{,} \PY{l+m}{50}\PY{p}{)}\PY{p}{,} \PY{c+c1}{\PYZsh{} latitude/longitude pairs providing southwest and northeast corners of the bounding box.}
+                     timeout \PY{o}{=} \PY{l+m}{120}\PY{p}{,} \PY{c+c1}{\PYZsh{} Keep connection alive for 60 seconds}
+                     oauth \PY{o}{=} my\PYZus{}oauth\PY{p}{)} \PY{c+c1}{\PYZsh{} Use my\PYZus{}oauth file as the OAuth credentials}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} tweets.df \PY{o}{\PYZlt{}\PYZhy{}} parseTweets\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{tweets1.json\PYZdq{}}\PY{p}{,} simplify \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} tweets.df
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

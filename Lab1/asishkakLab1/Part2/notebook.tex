@@ -1,0 +1,690 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{asishkakLab1Part2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Plot 1}\label{plot-1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}reshape2\PY{p}{)}
+         infl \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{1.csv\PYZdq{}}\PY{p}{,}header\PY{o}{=}\PY{n+nb+bp}{T}\PY{p}{)}
+         melted\PYZus{}infl \PY{o}{\PYZlt{}\PYZhy{}} melt\PY{p}{(}infl\PY{p}{,}id\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Week\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kp}{options}\PY{p}{(}repr.plot.width\PY{o}{=}\PY{l+m}{15}\PY{p}{,} repr.plot.height\PY{o}{=}\PY{l+m}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} ggplot\PY{p}{(}\PY{p}{)}\PY{o}{+} 
+        geom\PYZus{}bar\PY{p}{(}data\PY{o}{=}\PY{k+kp}{subset}\PY{p}{(}melted\PYZus{}infl\PY{p}{,}variable \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total.A\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total.B\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{k+kp}{factor}\PY{p}{(}Week\PY{p}{)}\PY{p}{,}y\PY{o}{=}value\PY{p}{,}fill\PY{o}{=}variable\PY{p}{)}\PY{p}{,}stat\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{)}\PY{o}{+}
+        scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Total.A\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{yellow\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Total.B\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{chartreuse4\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+        geom\PYZus{}line\PY{p}{(}data\PY{o}{=}\PY{k+kp}{subset}\PY{p}{(}melted\PYZus{}infl\PY{p}{,} variable \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.A\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.B\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{X..Positive\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                    aes\PY{p}{(}x\PY{o}{=}\PY{k+kp}{factor}\PY{p}{(}Week\PY{p}{)}\PY{p}{,}y\PY{o}{=}value\PY{o}{*}\PY{l+m}{350}\PY{p}{,}group\PY{o}{=}variable\PY{p}{,}colour\PY{o}{=}variable\PY{p}{,}linetype\PY{o}{=}variable\PY{p}{)}\PY{p}{)}\PY{o}{+}
+        scale\PYZus{}colour\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.A\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{orange\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.B\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{darkgreen\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{X..Positive\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+        scale\PYZus{}linetype\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.A\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{dashed\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Percent.Positive.B\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{dashed\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{X..Positive\PYZdq{}} \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{solid\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+        scale\PYZus{}y\PYZus{}continuous\PY{p}{(}sec.axis \PY{o}{=} sec\PYZus{}axis\PY{p}{(}\PY{o}{\PYZti{}}\PY{l+m}{.}\PY{o}{*}\PY{l+m}{0.0014}\PY{p}{,} name \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Percent Positive\PYZdq{}}\PY{p}{,}breaks \PY{o}{=} \PY{k+kp}{round}\PY{p}{(}\PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{2}\PY{p}{,} \PY{l+m}{30}\PY{p}{,} by \PY{o}{=} \PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+        labs\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Week\PYZdq{}}\PY{p}{,}y\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Number of Positive Specimens\PYZdq{}}\PY{p}{)}\PY{o}{+} ggtitle\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza Positive Tests Reported to CDC by U.S. Clinical Laboratories, }
+        \PY{l+s}{          National Summary, 2017\PYZhy{}2018 Season\PYZdq{}}\PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.title \PY{o}{=} element\PYZus{}text\PY{p}{(}hjust \PY{o}{=} \PY{l+m}{0.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Plot 2}\label{plot-2}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+         \PY{k+kn}{library} \PY{p}{(}reshape2\PY{p}{)}
+         
+         data\PYZus{}plot\PYZus{}2 \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{2.csv\PYZdq{}}\PY{p}{,} header\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+         data\PYZus{}plot\PYZus{}2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{subset}\PY{p}{(} data\PYZus{}plot\PYZus{}2\PY{p}{,} select \PY{o}{=} \PY{o}{\PYZhy{}}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{5}\PY{p}{,} \PY{l+m}{10} \PY{p}{)}\PY{p}{)}
+         data\PYZus{}plot\PYZus{}2\PYZus{}melt \PY{o}{\PYZlt{}\PYZhy{}} melt\PY{p}{(}data\PYZus{}plot\PYZus{}2\PY{p}{,}id\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Week\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         ggplot\PY{p}{(}\PY{p}{)}\PY{o}{+}
+           geom\PYZus{}bar\PY{p}{(}data\PY{o}{=}data\PYZus{}plot\PYZus{}2\PYZus{}melt\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{k+kp}{factor}\PY{p}{(}Week\PY{p}{)}\PY{p}{,}y\PY{o}{=}value\PY{p}{,}fill\PY{o}{=}variable\PY{p}{)}\PY{p}{,}stat\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{)}\PY{o}{+}
+           scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{yellow\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{orange\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{violet\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{darkgreen\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{green1\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{green\PYZdq{}} \PY{p}{)}\PY{p}{)}\PY{o}{+}
+           labs\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Week\PYZdq{}}\PY{p}{,}y\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Number of Positive Specimens\PYZdq{}}\PY{p}{)}\PY{o}{+}
+           ggtitle\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza Positive Tests Reported to CDC by U.S. Clinical Laboratories, }
+         \PY{l+s}{          National Summary, 2017\PYZhy{}2018 Season\PYZdq{}}\PY{p}{)}\PY{o}{+}theme\PY{p}{(}axis.text.x \PY{o}{=} element\PYZus{}text\PY{p}{(}angle \PY{o}{=} \PY{l+m}{90}\PY{p}{,} hjust \PY{o}{=} \PY{l+m}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Plot 3}\label{plot-3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{plotrix\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}plotrix\PY{p}{)}
+         leftMainChartData \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{4142}\PY{p}{,}\PY{l+m}{12720}\PY{p}{,}\PY{l+m}{774}\PY{p}{,}\PY{l+m}{144}\PY{p}{,}\PY{l+m}{178}\PY{p}{,}\PY{l+m}{118}\PY{p}{)}
+         chartlabel \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{4142\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{12720\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{774\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{144\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{178\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{118\PYZdq{}}\PY{p}{)}
+         label \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza A(H3N2)\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza A(H1N1)pdm09\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza A(Subtype unknown)\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza B Victoria\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza B Yamagata\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza B (lineage not determined)\PYZdq{}}\PY{p}{)}
+         colors \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{orange\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{yellow\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{lawngreen\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{green\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{darkgreen\PYZdq{}}\PY{p}{)}
+         df \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}leftMainChartData\PY{p}{,}label\PY{p}{)}
+         
+         dp \PY{o}{\PYZlt{}\PYZhy{}} pie\PY{p}{(}leftMainChartData\PY{p}{,}labels \PY{o}{=} leftMainChartData\PY{p}{,}clockwise\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{,}col\PY{o}{=}colors\PY{p}{,}radius\PY{o}{=}\PY{l+m}{0.7}\PY{p}{,}
+            main\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Influenza Positive Specimens Reported by\PYZbs{}n US Public Health Laboratories\PYZbs{}n Cumulative, 2018\PYZhy{}2019 Season\PYZdq{}}\PY{p}{)}
+         legend\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{,}label\PY{p}{,}cex\PY{o}{=}\PY{l+m}{0.5}\PY{p}{,}fill\PY{o}{=}colors\PY{p}{,}bty\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{n\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+         
+         bp \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}df\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}y\PY{o}{=}leftMainChartData\PY{p}{,}fill\PY{o}{=}label\PY{p}{)}\PY{p}{)}\PY{o}{+}geom\PYZus{}bar\PY{p}{(}width \PY{o}{=} \PY{l+m}{1}\PY{p}{,} stat \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{,}col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{)}
+         pie \PY{o}{\PYZlt{}\PYZhy{}} bp \PY{o}{+} coord\PYZus{}polar\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZdq{}}\PY{p}{,}start\PY{o}{=}\PY{l+m}{0}\PY{p}{)}
+         pie \PY{o}{\PYZlt{}\PYZhy{}} pie \PY{o}{+} scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{orange\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{yellow\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{lawngreen\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{green\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{darkgreen\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         pie \PY{o}{\PYZlt{}\PYZhy{}} pie \PY{o}{+} theme\PY{p}{(}legend.position \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{)}
+         pie \PY{o}{\PYZlt{}\PYZhy{}} pie \PY{o}{+} theme\PY{p}{(}
+             axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.x \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.y \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.grid\PY{o}{=}element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           plot.title\PY{o}{=}element\PYZus{}text\PY{p}{(}size\PY{o}{=}\PY{l+m}{14}\PY{p}{,} face\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{bold\PYZdq{}}\PY{p}{)}\PY{p}{,}
+             panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}
+           \PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.margin \PY{o}{=} unit\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{cm\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         pie1 \PY{o}{\PYZlt{}\PYZhy{}} pie \PY{o}{+} geom\PYZus{}text\PY{p}{(}aes\PY{p}{(}label \PY{o}{=} leftMainChartData\PY{p}{)}\PY{p}{,}hjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}vjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}angle\PY{o}{=}\PY{l+m}{45}\PY{p}{,}size\PY{o}{=}\PY{l+m}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} pie1
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} df3 \PY{o}{\PYZlt{}\PYZhy{}} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{3.csv\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} df3
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllll}
+ X.Sub.type & B.Lineage & Sequence.Genetic.Group & Distinct.count.of.Cdc.Id.. & X..of.Total.Distinct.count.of.Cdc.Id..\\
+\hline
+	 B        & Victoria & V1A      &  15      & 31.3\% \\
+	          &          & V1A.1    &  30      & 62.5\% \\
+	          &          & V1A-3DEL &   3      & 6.3\%  \\
+	          & Yamagata & Y3       &  74      & 100.0\%\\
+	 H1pdm09  &          & 6B.1     & 626      & 100.0\%\\
+	 H3       &          & 3C.2a    &  62      & 16.3\% \\
+	          &          & 3C.2a1   & 122      & 32.0\% \\
+	          &          & 3C.3a    & 197      & 51.7\% \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} AH3N2 \PY{o}{\PYZlt{}\PYZhy{}} df3\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{6}\PY{o}{:}\PY{l+m}{8}\PY{p}{)}\PY{p}{,}\PY{p}{]}
+         AH1N1 \PY{o}{\PYZlt{}\PYZhy{}} df3\PY{p}{[}\PY{l+m}{5}\PY{p}{,}\PY{p}{]}
+         victoria \PY{o}{\PYZlt{}\PYZhy{}} df3\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{3}\PY{p}{)}\PY{p}{,}\PY{p}{]}
+         yamagata \PY{o}{\PYZlt{}\PYZhy{}} df3\PY{p}{[}\PY{l+m}{4}\PY{p}{,}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ggpubr\PYZdq{}}\PY{p}{)}
+         \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{gridExtra\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Graph 1}
+         AH3N2\PYZus{}data \PY{o}{\PYZlt{}\PYZhy{}} AH3N2\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+         Influenza\PYZus{}AH3N2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{16\PYZpc{}\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{52\PYZpc{}\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{32\PYZpc{}\PYZdq{}}\PY{p}{)}
+         dat1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}AH3N2\PYZus{}data\PY{p}{,}Influenza\PYZus{}AH3N2\PY{p}{)}
+         bp1 \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}dat1\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}y\PY{o}{=}AH3N2\PYZus{}data\PY{p}{,}fill\PY{o}{=}Influenza\PYZus{}AH3N2\PY{p}{)}\PY{p}{)}\PY{o}{+}geom\PYZus{}bar\PY{p}{(}width \PY{o}{=} \PY{l+m}{1}\PY{p}{,} stat \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{,}col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{)} 
+         pie1 \PY{o}{\PYZlt{}\PYZhy{}} bp1 \PY{o}{+} coord\PYZus{}polar\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZdq{}}\PY{p}{,}start\PY{o}{=}\PY{l+m}{90}\PY{p}{)}
+         pie1 \PY{o}{\PYZlt{}\PYZhy{}} pie1 \PY{o}{+} scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}FDF6F8\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}EB372A\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}EE644F\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         pie1 \PY{o}{\PYZlt{}\PYZhy{}} pie1 \PY{o}{+} theme\PY{p}{(}legend.position \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{)} \PY{o}{+}theme\PY{p}{(}
+             axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.x \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.y \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.grid\PY{o}{=}element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           plot.title\PY{o}{=}element\PYZus{}text\PY{p}{(}size\PY{o}{=}\PY{l+m}{14}\PY{p}{,} face\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{bold\PYZdq{}}\PY{p}{)}\PY{p}{,}
+             panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}
+           \PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.margin \PY{o}{=} unit\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{cm\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         pie1 \PY{o}{\PYZlt{}\PYZhy{}} pie1 \PY{o}{+} geom\PYZus{}text\PY{p}{(}aes\PY{p}{(}x\PY{o}{=}\PY{l+m}{1}\PY{p}{,}label \PY{o}{=} Influenza\PYZus{}AH3N2\PY{p}{)}\PY{p}{,}hjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}vjust\PY{o}{=}\PY{l+m}{0.5}\PY{p}{,}angle\PY{o}{=}\PY{l+m}{0}\PY{p}{,}size\PY{o}{=}\PY{l+m}{3}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Graph 2}
+         victoria\PYZus{}data \PY{o}{\PYZlt{}\PYZhy{}} victoria\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+         Influenza\PYZus{}B\PYZus{}Victoria \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{31.3\PYZpc{}\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{62.5\PYZpc{}\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{6.3\PYZpc{}\PYZdq{}}\PY{p}{)}
+         dat2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}victoria\PYZus{}data\PY{p}{,}Influenza\PYZus{}B\PYZus{}Victoria\PY{p}{)}
+         bp2 \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}dat2\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}y\PY{o}{=}victoria\PYZus{}data\PY{p}{,}fill\PY{o}{=}Influenza\PYZus{}B\PYZus{}Victoria\PY{p}{)}\PY{p}{)}\PY{o}{+}geom\PYZus{}bar\PY{p}{(}width \PY{o}{=} \PY{l+m}{1}\PY{p}{,} stat \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{,}col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{black\PYZdq{}}\PY{p}{)} 
+         pie2 \PY{o}{\PYZlt{}\PYZhy{}} bp2 \PY{o}{+} coord\PYZus{}polar\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZdq{}}\PY{p}{,}start\PY{o}{=}\PY{l+m}{90}\PY{p}{)}
+         pie2 \PY{o}{\PYZlt{}\PYZhy{}} pie2 \PY{o}{+} scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}D6F685\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}F6F6C9\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}E6F9D0\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         pie2 \PY{o}{\PYZlt{}\PYZhy{}} pie2 \PY{o}{+} theme\PY{p}{(}legend.position \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{)} \PY{o}{+}theme\PY{p}{(}
+             axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.x \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.y \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.grid\PY{o}{=}element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           plot.title\PY{o}{=}element\PYZus{}text\PY{p}{(}size\PY{o}{=}\PY{l+m}{14}\PY{p}{,} face\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{bold\PYZdq{}}\PY{p}{)}\PY{p}{,}
+             panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}
+           \PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.margin \PY{o}{=} unit\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{cm\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         pie2 \PY{o}{\PYZlt{}\PYZhy{}} pie2 \PY{o}{+} geom\PYZus{}text\PY{p}{(}aes\PY{p}{(}x\PY{o}{=}\PY{l+m}{1}\PY{p}{,}label \PY{o}{=} Influenza\PYZus{}B\PYZus{}Victoria\PY{p}{)}\PY{p}{,}hjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}vjust\PY{o}{=}\PY{l+m}{0.5}\PY{p}{,}angle\PY{o}{=}\PY{l+m}{0}\PY{p}{,}size\PY{o}{=}\PY{l+m}{3}\PY{p}{)}
+         
+         
+         
+         
+         
+         \PY{c+c1}{\PYZsh{} Graph 3}
+         Influenza\PYZus{}AH1N1\PYZus{}pdm09 \PY{o}{\PYZlt{}\PYZhy{}} AH1N1\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+         dat3 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}Influenza\PYZus{}AH1N1\PYZus{}pdm09\PY{p}{,}labels\PY{o}{=}AH3N2\PYZus{}data\PY{p}{)}
+         bp3 \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}dat3\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}y\PY{o}{=}Influenza\PYZus{}AH1N1\PYZus{}pdm09\PY{p}{,}fill\PY{o}{=}Influenza\PYZus{}AH1N1\PYZus{}pdm09\PY{p}{)}\PY{p}{)}\PY{o}{+}geom\PYZus{}bar\PY{p}{(}width \PY{o}{=} \PY{l+m}{1}\PY{p}{,} stat \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{)} 
+         pie3 \PY{o}{\PYZlt{}\PYZhy{}} bp3 \PY{o}{+} coord\PYZus{}polar\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZdq{}}\PY{p}{,}start\PY{o}{=}\PY{l+m}{90}\PY{p}{)}
+         pie3 \PY{o}{\PYZlt{}\PYZhy{}} pie3 \PY{o}{+} scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}F8D38E\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         pie3 \PY{o}{\PYZlt{}\PYZhy{}} pie3 \PY{o}{+} theme\PY{p}{(}legend.position \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{)} \PY{o}{+}theme\PY{p}{(}
+             axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.x \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.y \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.grid\PY{o}{=}element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           plot.title\PY{o}{=}element\PYZus{}text\PY{p}{(}size\PY{o}{=}\PY{l+m}{14}\PY{p}{,} face\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{bold\PYZdq{}}\PY{p}{)}\PY{p}{,}
+             panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}
+           \PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.margin \PY{o}{=} unit\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{cm\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         pie3 \PY{o}{\PYZlt{}\PYZhy{}} pie3 \PY{o}{+} geom\PYZus{}text\PY{p}{(}aes\PY{p}{(}x\PY{o}{=}\PY{l+m}{1}\PY{p}{,}label \PY{o}{=} Influenza\PYZus{}AH1N1\PYZus{}pdm09\PY{p}{)}\PY{p}{,}hjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}vjust\PY{o}{=}\PY{l+m}{0.5}\PY{p}{,}angle\PY{o}{=}\PY{l+m}{0}\PY{p}{,}size\PY{o}{=}\PY{l+m}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Graph 4}
+         Influenza\PYZus{}B\PYZus{}Yamagata \PY{o}{\PYZlt{}\PYZhy{}} yamagata\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+         dat4 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{data.frame}\PY{p}{(}Influenza\PYZus{}B\PYZus{}Yamagata\PY{p}{,}labels\PY{o}{=}AH3N2\PYZus{}data\PY{p}{)}
+         bp4 \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}dat4\PY{p}{,}aes\PY{p}{(}x\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}y\PY{o}{=}Influenza\PYZus{}B\PYZus{}Yamagata\PY{p}{,}fill\PY{o}{=}Influenza\PYZus{}B\PYZus{}Yamagata\PY{p}{)}\PY{p}{)}\PY{o}{+}geom\PYZus{}bar\PY{p}{(}width \PY{o}{=} \PY{l+m}{1}\PY{p}{,} stat \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{identity\PYZdq{}}\PY{p}{)} 
+         pie4 \PY{o}{\PYZlt{}\PYZhy{}} bp4 \PY{o}{+} coord\PYZus{}polar\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZdq{}}\PY{p}{,}start\PY{o}{=}\PY{l+m}{90}\PY{p}{)}
+         pie4 \PY{o}{\PYZlt{}\PYZhy{}} pie4 \PY{o}{+} scale\PYZus{}fill\PYZus{}manual\PY{p}{(}values\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}7BAF44\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         pie4 \PY{o}{\PYZlt{}\PYZhy{}} pie4 \PY{o}{+} theme\PY{p}{(}legend.position \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{bottom\PYZdq{}}\PY{p}{)} \PY{o}{+}theme\PY{p}{(}
+             axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.x \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.title.y \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           panel.grid\PY{o}{=}element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+           plot.title\PY{o}{=}element\PYZus{}text\PY{p}{(}size\PY{o}{=}\PY{l+m}{14}\PY{p}{,} face\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{bold\PYZdq{}}\PY{p}{)}\PY{p}{,}
+             panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}
+           \PY{p}{)}\PY{o}{+}theme\PY{p}{(}plot.margin \PY{o}{=} unit\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{cm\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         pie4 \PY{o}{\PYZlt{}\PYZhy{}} pie4 \PY{o}{+} geom\PYZus{}text\PY{p}{(}aes\PY{p}{(}x\PY{o}{=}\PY{l+m}{1}\PY{p}{,}label \PY{o}{=} Influenza\PYZus{}B\PYZus{}Yamagata\PY{p}{)}\PY{p}{,}hjust\PY{o}{=}\PY{l+m}{0}\PY{p}{,}vjust\PY{o}{=}\PY{l+m}{0.5}\PY{p}{,}angle\PY{o}{=}\PY{l+m}{0}\PY{p}{,}size\PY{o}{=}\PY{l+m}{3}\PY{p}{)}
+         
+         grid.arrange\PY{p}{(}pie1\PY{p}{,} pie2\PY{p}{,} pie3\PY{p}{,} pie4\PY{p}{,}
+                      ncol \PY{o}{=} \PY{l+m}{2}\PY{p}{,} nrow \PY{o}{=} \PY{l+m}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updating HTML index of packages in '.Library'
+Making 'packages.html' {\ldots} done
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}ggmap\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}maps\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}maptools\PY{p}{)}
+        
+        
+        map\PYZus{}dat \PY{o}{=} read.csv\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{heatmap.csv\PYZdq{}}\PY{p}{,}sep \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{,\PYZdq{}}\PY{p}{)}
+        map\PYZus{}dat \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{subset}\PY{p}{(}map\PYZus{}dat\PY{p}{,}select \PY{o}{=} \PY{o}{\PYZhy{}}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
+Please cite ggmap if you use it! See citation("ggmap") for details.
+Loading required package: sp
+Checking rgeos availability: FALSE
+ 	Note: when rgeos is not available, polygon geometry 	computations in maptools depend on gpclib,
+ 	which has a restricted licence. It is disabled by default;
+ 	to enable gpclib, type gpclibPermit()
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} map\PYZus{}dat
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lll}
+ STATENAME & ACTIVITY.LEVEL & ACTIVITY.LEVEL.LABEL\\
+\hline
+	 Alabama              & Level 2              & Minimal             \\
+	 Alaska               & Level 1              & Minimal             \\
+	 Arizona              & Level 1              & Minimal             \\
+	 Arkansas             & Level 1              & Minimal             \\
+	 California           & Level 1              & Minimal             \\
+	 Colorado             & Level 1              & Minimal             \\
+	 Connecticut          & Level 1              & Minimal             \\
+	 Delaware             & Level 1              & Minimal             \\
+	 District of Columbia & Level 2              & Minimal             \\
+	 Florida              & Level 1              & Minimal             \\
+	 Georgia              & Level 3              & Minimal             \\
+	 Hawaii               & Level 1              & Minimal             \\
+	 Idaho                & Level 1              & Minimal             \\
+	 Illinois             & Level 1              & Minimal             \\
+	 Indiana              & Level 1              & Minimal             \\
+	 Iowa                 & Level 1              & Minimal             \\
+	 Kansas               & Level 1              & Minimal             \\
+	 Kentucky             & Level 1              & Minimal             \\
+	 Louisiana            & Level 3              & Minimal             \\
+	 Maine                & Level 1              & Minimal             \\
+	 Maryland             & Level 1              & Minimal             \\
+	 Massachusetts        & Level 1              & Minimal             \\
+	 Michigan             & Level 1              & Minimal             \\
+	 Minnesota            & Level 1              & Minimal             \\
+	 Mississippi          & Level 1              & Minimal             \\
+	 Missouri             & Level 1              & Minimal             \\
+	 Montana              & Level 1              & Minimal             \\
+	 Nebraska             & Level 1              & Minimal             \\
+	 Nevada               & Level 1              & Minimal             \\
+	 New Hampshire        & Level 1              & Minimal             \\
+	 ⋮ & ⋮ & ⋮\\
+	 Mississippi    & Level 10       & High          \\
+	 Missouri       & Level 6        & Moderate      \\
+	 Montana        & Level 3        & Minimal       \\
+	 Nebraska       & Level 10       & High          \\
+	 Nevada         & Level 5        & Low           \\
+	 New Hampshire  & Level 5        & Low           \\
+	 New Jersey     & Level 10       & High          \\
+	 New Mexico     & Level 10       & High          \\
+	 New York       & Level 8        & High          \\
+	 North Carolina & Level 9        & High          \\
+	 North Dakota   & Level 2        & Minimal       \\
+	 Ohio           & Level 2        & Minimal       \\
+	 Oklahoma       & Level 10       & High          \\
+	 Oregon         & Level 4        & Low           \\
+	 Pennsylvania   & Level 7        & Moderate      \\
+	 Rhode Island   & Level 10       & High          \\
+	 South Carolina & Level 10       & High          \\
+	 South Dakota   & Level 4        & Low           \\
+	 Tennessee      & Level 6        & Moderate      \\
+	 Texas          & Level 10       & High          \\
+	 Utah           & Level 9        & High          \\
+	 Vermont        & Level 9        & High          \\
+	 Virginia       & Level 10       & High          \\
+	 Washington     & Level 4        & Low           \\
+	 West Virginia  & Level 7        & Moderate      \\
+	 Wisconsin      & Level 4        & Low           \\
+	 Wyoming        & Level 7        & Moderate      \\
+	 New York City  & Level 9        & High          \\
+	 Puerto Rico    & Level 6        & Moderate      \\
+	 Virgin Islands & Level 3        & Minimal       \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} map\PYZus{}dat\PY{o}{\PYZdl{}}levels \PY{o}{=} \PY{k+kp}{sapply}\PY{p}{(}map\PYZus{}dat\PY{o}{\PYZdl{}}ACTIVITY.LEVEL\PY{p}{,}\PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{k+kp}{gsub}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Level \PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}x\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        map\PYZus{}dat\PY{o}{\PYZdl{}}levels \PY{o}{=} \PY{k+kp}{as.numeric}\PY{p}{(}map\PYZus{}dat\PY{o}{\PYZdl{}}\PY{k+kp}{levels}\PY{p}{)}
+        
+        state\PYZus{}name \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+        state\PYZus{}level \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+        \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{k+kp}{unique}\PY{p}{(}map\PYZus{}dat\PY{o}{\PYZdl{}}STATENAME\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+            map\PYZus{}df \PY{o}{=} map\PYZus{}dat\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}map\PYZus{}dat\PY{o}{\PYZdl{}}STATENAME \PY{o}{==} i\PY{p}{)}\PY{p}{,}\PY{p}{]}
+            state\PYZus{}name \PY{o}{=} \PY{k+kp}{append}\PY{p}{(}state\PYZus{}name\PY{p}{,}i\PY{p}{)}
+            state\PYZus{}level \PY{o}{=} \PY{k+kp}{append}\PY{p}{(}state\PYZus{}level\PY{p}{,}\PY{k+kp}{max}\PY{p}{(}map\PYZus{}df\PY{o}{\PYZdl{}}\PY{k+kp}{levels}\PY{p}{)}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        final\PYZus{}df \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}state\PYZus{}name\PY{p}{,}state\PYZus{}level\PY{p}{)}
+        coords \PY{o}{=} map\PYZus{}data\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{state\PYZdq{}}\PY{p}{)}
+                                
+        region\PYZus{}level \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+        \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}coords\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+            region \PY{o}{=} coords\PY{o}{\PYZdl{}}region\PY{p}{[}i\PY{p}{]}
+            index \PY{o}{=} \PY{k+kp}{grep}\PY{p}{(}region\PY{p}{,}\PY{k+kp}{tolower}\PY{p}{(}final\PYZus{}df\PY{o}{\PYZdl{}}state\PYZus{}name\PY{p}{)}\PY{p}{)}
+            region\PYZus{}level \PY{o}{=} \PY{k+kp}{append}\PY{p}{(}region\PYZus{}level\PY{p}{,}final\PYZus{}df\PY{o}{\PYZdl{}}state\PYZus{}level\PY{p}{[}index\PY{p}{[}\PY{l+m}{1}\PY{p}{]]}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+                                
+        coords\PY{o}{\PYZdl{}}region\PYZus{}level \PY{o}{=} region\PYZus{}level
+        final\PYZus{}df\PY{o}{\PYZdl{}}region \PY{o}{=} region
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kp}{options}\PY{p}{(}repr.plot.width\PY{o}{=}\PY{l+m}{4}\PY{p}{,} repr.plot.height\PY{o}{=}\PY{l+m}{2}\PY{p}{)}
+         coords\PY{o}{\PYZdl{}}final\PYZus{}regionlevel \PY{o}{=} \PY{k+kp}{sapply}\PY{p}{(}coords\PY{o}{\PYZdl{}}region\PYZus{}level\PY{p}{,} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Minimal\PYZdq{}}\PY{p}{,} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Low\PYZdq{}}\PY{p}{,} \PY{k+kp}{ifelse}\PY{p}{(}x \PY{o}{\PYZpc{}in\PYZpc{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{Moderate\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{High\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         plot \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}coords\PY{p}{,} aes\PY{p}{(}coords\PY{o}{\PYZdl{}}long\PY{p}{,} coords\PY{o}{\PYZdl{}}lat\PY{p}{)}\PY{p}{)} \PY{o}{+}
+           geom\PYZus{}polygon\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} group\PY{p}{,} fill \PY{o}{=} coords\PY{o}{\PYZdl{}}final\PYZus{}regionlevel\PY{p}{)}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{white\PYZdq{}}\PY{p}{)} \PY{o}{+} 
+           scale\PYZus{}fill\PYZus{}manual\PY{p}{(}name\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{ILI Activity Level\PYZdq{}}\PY{p}{,}values \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}43CD80\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}76EE00\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZsh{}EE9A00\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{+}coord\PYZus{}quickmap\PY{p}{(}\PY{p}{)}
+                                           
+         plot \PY{o}{\PYZlt{}\PYZhy{}} plot \PY{o}{+} theme\PY{p}{(}panel.border \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+                 theme\PY{p}{(}panel.background \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+                 theme\PY{p}{(}axis.ticks \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+                 theme\PY{p}{(}axis.text \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} labs\PY{p}{(}x \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{,} y \PY{o}{=} \PY{k+kc}{NULL}\PY{p}{)} \PY{o}{+} ggtitle\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ILI Activity Level , 2019\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} plot
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
