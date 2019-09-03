@@ -1,7 +1,0 @@
-"0","attach(mtcars)"
-"2","The following object is masked from package:ggplot2:
-
-    mpg
-
-"
-"0","head(mtcars)"

@@ -1,3 +1,0 @@
-"0","sales<-read.table(file.choose(), header=T)"
-"2","Error in file.choose() : file choice cancelled
-"
